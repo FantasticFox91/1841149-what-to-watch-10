@@ -7,18 +7,16 @@ import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import PageNotFoundScreen from '../../pages/page-not-found-screen/page-not-found-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
-import { Film } from '../../types/films';
 import PrivateRoute from '../private-route/private-route';
 
 type AppScreenProps = {
   title: string,
   genre: string,
   year: number,
-  films: Film[],
   isLogined: boolean,
 };
 
-function App({title, genre, year, films, isLogined}: AppScreenProps): JSX.Element {
+function App({title, genre, year, isLogined}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>

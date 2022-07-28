@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-import { FILMS } from './mocks/films';
 import { store } from './store';
 
 const PROMO_FILM = {
@@ -22,7 +21,6 @@ root.render(
         title={PROMO_FILM.TITLE}
         genre={PROMO_FILM.GENRE}
         year={PROMO_FILM.YEAR}
-        films={FILMS}
         isLogined
       />
     </Provider>

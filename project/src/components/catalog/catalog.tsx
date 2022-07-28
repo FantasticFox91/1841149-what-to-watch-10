@@ -1,20 +1,16 @@
-import { Film } from '../../types/films';
+import { useEffect } from 'react';
+import { CARDS_PER_STEP, INITAL_FILMS_GENRE } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { resetFilmsList } from '../../store/action';
+import FilmsListWithButton from '../film-list-with-button/films-list-with-button';
 import GenresList from '../genres-list/genres-list';
-import FilmsList from '../../components/films-list/films-list';
-import { useAppSelector } from '../../hooks';
-import { CARDS_PER_STEP } from '../../const';
-import ShowMoreButton from '../../components/show-more-button/show-more-button';
 
-type DetailsProps = {
-  films: Film[];
-}
+function Catalog(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-function Catalog({films}: DetailsProps): JSX.Element {
-  const selectedGenre = useAppSelector((state) => state.genre);
-
-  const sortedFilms = films.filter((film) => selectedGenre === 'All genres' ? films : film.genre === selectedGenre);
-
-  const renderShowMoreButton = sortedFilms.length > CARDS_PER_STEP ? <ShowMoreButton /> : null;
+  useEffect(() => {
+    dispatch(resetFilmsList({filmsToShow: CARDS_PER_STEP, genre: INITAL_FILMS_GENRE}));
+  });
 
   return (
     <section className="catalog">
@@ -22,9 +18,7 @@ function Catalog({films}: DetailsProps): JSX.Element {
 
       <GenresList />
 
-      <FilmsList films={sortedFilms}/>
-
-      {renderShowMoreButton}
+      <FilmsListWithButton />
 
     </section>
   );

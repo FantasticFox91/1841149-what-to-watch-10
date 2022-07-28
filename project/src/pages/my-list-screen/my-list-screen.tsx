@@ -8,7 +8,7 @@ type MyListScreenProps = {
 }
 
 function MyListScreen({isLoggined}: MyListScreenProps): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const films = useAppSelector((state) => state.films).filter((film) => film.isFavorite);
   const filmsList =
     films?.map((film) => (
       <FilmCard key={film.id} id={film.id} previewImage={film.previewImage} name={film.name}/>

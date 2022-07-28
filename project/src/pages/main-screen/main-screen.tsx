@@ -13,7 +13,7 @@ type mainScreenProps = {
 
 function MainScreen({title, genre, year, isLogined}: mainScreenProps): JSX.Element {
   const navigate = useNavigate();
-  const films = useAppSelector((state) => state.films);
+  const favoriteFilmsLength = useAppSelector((state) => state.favouriteFilms);
 
   const myListButtonClickHandler = () => {
     const path = '/mylist';
@@ -61,7 +61,7 @@ function MainScreen({title, genre, year, isLogined}: mainScreenProps): JSX.Eleme
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">{films.length}</span>
+                  <span className="film-card__count">{favoriteFilmsLength}</span>
                 </button>
               </div>
             </div>
@@ -70,7 +70,7 @@ function MainScreen({title, genre, year, isLogined}: mainScreenProps): JSX.Eleme
       </section>
 
       <div className="page-content">
-        <Catalog films={films} />
+        <Catalog />
 
         <Footer />
       </div>

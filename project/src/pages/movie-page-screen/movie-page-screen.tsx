@@ -11,10 +11,11 @@ type MoviePageScreenProps = {
 
 function MoviePageScreen({isLogined }: MoviePageScreenProps): JSX.Element {
   const films = useAppSelector((state) => state.films);
+  const favoriteFilmsLength = useAppSelector((state) => state.favouriteFilms);
   const navigate = useNavigate();
   const params = useParams();
   const film = films.find((filmA) => String(filmA.id) === params.id);
-  const similarFilms = films.filter((filmA) => (filmA.genre === film?.genre) && filmA.id !== film?.id);
+  const similarFilms = films.filter((filmA) => (filmA.genre === film?.genre) && filmA.id !== film?.id).slice(0, 4);
 
   const onPlayButtonClickHandler = () => {
     const path = `/player/${film?.id}`;
@@ -57,7 +58,7 @@ function MoviePageScreen({isLogined }: MoviePageScreenProps): JSX.Element {
                     <use xlinkHref="#in-list"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">{films.length}</span>
+                  <span className="film-card__count">{favoriteFilmsLength}</span>
                 </button>
                 <Link to={`/films/${film?.id}/review`} className="btn film-card__button">Add review</Link>
               </div>
