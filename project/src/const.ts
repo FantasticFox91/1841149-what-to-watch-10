@@ -14,6 +14,13 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+enum APIRoute {
+  Films = '/films',
+  Promo = '/promo',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 const GENRE_TABS = [
   'All genres',
   'Comedie',
@@ -31,4 +38,4 @@ const INITAL_FILMS_GENRE = 'All genres';
 
 const CARDS_PER_STEP = 8;
 
-export { AppRoute, AuthorizationStatus, INITAL_FILMS_GENRE, CARDS_PER_STEP, GENRE_TABS };
+export { AppRoute, AuthorizationStatus, APIRoute, INITAL_FILMS_GENRE, CARDS_PER_STEP, GENRE_TABS };

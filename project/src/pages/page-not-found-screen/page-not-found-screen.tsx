@@ -4,7 +4,11 @@ import Header from '../../components/header/header';
 import { AppRoute } from '../../const';
 import './page-not-found.css';
 
-function PageNotFoundScreen({isLogined}: {isLogined: boolean}): JSX.Element {
+type PageNotFoundScreenProps = {
+  authorizationStatus: boolean;
+}
+
+function PageNotFoundScreen({authorizationStatus}: PageNotFoundScreenProps): JSX.Element {
   return (
     <section className="film-card film-card--full page-not-found">
       <div className="film-card__header">
@@ -13,7 +17,7 @@ function PageNotFoundScreen({isLogined}: {isLogined: boolean}): JSX.Element {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header isLogined={isLogined}/>
+        <Header isLogined={authorizationStatus}/>
       </div>
       <div className='page-not-found__container'>
         <div className="page-not-found__message">

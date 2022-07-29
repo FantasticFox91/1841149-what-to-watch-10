@@ -4,10 +4,10 @@ import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks';
 
 type MyListScreenProps = {
-  isLoggined: boolean;
-}
+  authorizationStatus: boolean;
+};
 
-function MyListScreen({isLoggined}: MyListScreenProps): JSX.Element {
+function MyListScreen({authorizationStatus}: MyListScreenProps): JSX.Element {
   const films = useAppSelector((state) => state.films).filter((film) => film.isFavorite);
   const filmsList =
     films?.map((film) => (
@@ -16,7 +16,7 @@ function MyListScreen({isLoggined}: MyListScreenProps): JSX.Element {
 
   return (
     <div className="user-page">
-      <Header isLogined={isLoggined}/>
+      <Header isLogined={authorizationStatus}/>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>

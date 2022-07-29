@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import MoviePage from '../../pages/movie-page-screen/movie-page-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
@@ -9,14 +11,16 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import PrivateRoute from '../private-route/private-route';
 
-type AppScreenProps = {
-  title: string,
-  genre: string,
-  year: number,
-  isLogined: boolean,
-};
 
-function App({title, genre, year, isLogined}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
+  const {authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
+
+  if (isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -24,12 +28,7 @@ function App({title, genre, year, isLogined}: AppScreenProps): JSX.Element {
           path={AppRoute.Root}
           element=
             {
-              <MainScreen
-                title={title}
-                genre={genre}
-                year={year}
-                isLogined
-              />
+              <MainScreen authorizationStatus={authorizationStatus === AuthorizationStatus.Auth}/>
             }
         />
         <Route
@@ -41,13 +40,13 @@ function App({title, genre, year, isLogined}: AppScreenProps): JSX.Element {
           element=
             {
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
+                authorizationStatus={authorizationStatus}
               >
-                <MyListScreen isLoggined={isLogined}/>
+                <MyListScreen authorizationStatus={authorizationStatus === AuthorizationStatus.Auth}/>
               </PrivateRoute>
             }
         />
-        <Route path={AppRoute.Film} element={<MoviePage isLogined={isLogined}/>} />
+        <Route path={AppRoute.Film} element={<MoviePage authorizationStatus={authorizationStatus === AuthorizationStatus.Auth}/>} />
         <Route path={AppRoute.Player} element={<PlayerScreen />}>
           <Route path=":id" element={<PlayerScreen />} />
         </Route>
@@ -56,7 +55,7 @@ function App({title, genre, year, isLogined}: AppScreenProps): JSX.Element {
           element=
             {
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
+                authorizationStatus={authorizationStatus}
               >
                 <AddReviewScreen />
               </PrivateRoute>
@@ -64,7 +63,7 @@ function App({title, genre, year, isLogined}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.NotFound}
-          element={<PageNotFoundScreen isLogined={isLogined}/>}
+          element={<PageNotFoundScreen authorizationStatus={authorizationStatus === AuthorizationStatus.Auth}/>}
         />
       </Routes>
     </BrowserRouter>

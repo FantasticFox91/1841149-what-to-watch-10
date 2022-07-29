@@ -6,12 +6,12 @@ import Tabs from '../../components/tabs/tabs';
 import { useAppSelector } from '../../hooks';
 
 type MoviePageScreenProps = {
-  isLogined: boolean;
+  authorizationStatus: boolean;
 }
 
-function MoviePageScreen({isLogined }: MoviePageScreenProps): JSX.Element {
+function MoviePageScreen({authorizationStatus}: MoviePageScreenProps): JSX.Element {
   const films = useAppSelector((state) => state.films);
-  const favoriteFilmsLength = useAppSelector((state) => state.favouriteFilms);
+  const favoriteFilmsLength = useAppSelector((state) => state.films).filter((filmA) => filmA.isFavorite).length;
   const navigate = useNavigate();
   const params = useParams();
   const film = films.find((filmA) => String(filmA.id) === params.id);
@@ -27,16 +27,21 @@ function MoviePageScreen({isLogined }: MoviePageScreenProps): JSX.Element {
     navigate(path);
   };
 
+  const style = {
+    backgroundColor: `${film?.backgroundColor}`
+  };
+
+
   return (
     <>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={style}>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={film?.backgroundImage} alt={film?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
-          <Header isLogined={isLogined}/>
+          <Header isLogined={authorizationStatus}/>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
