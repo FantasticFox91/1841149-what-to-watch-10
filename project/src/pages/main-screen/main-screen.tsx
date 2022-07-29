@@ -4,16 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import Catalog from '../../components/catalog/catalog';
 import { useAppSelector } from '../../hooks';
 
-type mainScreenProps = {
-  title: string,
-  genre: string,
-  year: number,
-  isLogined: boolean,
-};
+type MainScreeenProps = {
+  authorizationStatus: boolean;
+}
 
-function MainScreen({title, genre, year, isLogined}: mainScreenProps): JSX.Element {
+function MainScreen({authorizationStatus}: MainScreeenProps): JSX.Element {
   const navigate = useNavigate();
-  const favoriteFilmsLength = useAppSelector((state) => state.favouriteFilms);
+  const favoriteFilmsLength = useAppSelector((state) => state.films).filter((filmA) => filmA.isFavorite).length;
+  const films = useAppSelector((state) => state.films);
+  const promoFilm = useAppSelector((state) => state.promo);
 
   const myListButtonClickHandler = () => {
     const path = '/mylist';
@@ -29,24 +28,24 @@ function MainScreen({title, genre, year, isLogined}: mainScreenProps): JSX.Eleme
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={promoFilm?.backgroundImage} alt={promoFilm?.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header isLogined={isLogined}/>
+        <Header isLogined={authorizationStatus}/>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={promoFilm?.posterImage} alt={promoFilm?.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{promoFilm?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{year}</span>
+                <span className="film-card__genre">{promoFilm?.genre}</span>
+                <span className="film-card__year">{promoFilm?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -70,7 +69,7 @@ function MainScreen({title, genre, year, isLogined}: mainScreenProps): JSX.Eleme
       </section>
 
       <div className="page-content">
-        <Catalog />
+        <Catalog films={films}/>
 
         <Footer />
       </div>
