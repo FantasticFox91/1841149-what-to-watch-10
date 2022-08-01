@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
