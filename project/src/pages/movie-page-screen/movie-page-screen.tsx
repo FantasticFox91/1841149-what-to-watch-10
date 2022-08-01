@@ -1,17 +1,19 @@
+import { useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SimilarFilmsList from '../../components/similar-films-list/similar-films-list';
 import Tabs from '../../components/tabs/tabs';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
 
 function MoviePageScreen(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const dispatch = useAppDispatch();
+  const film = useAppSelector((state) => state.film);
+  const similarFilms = useAppSelector((state) => state.similarFilms);
   const favoriteFilmsLength = useAppSelector((state) => state.films).filter((filmA) => filmA.isFavorite).length;
   const navigate = useNavigate();
   const params = useParams();
-  const film = films.find((filmA) => String(filmA.id) === params.id);
-  const similarFilms = films.filter((filmA) => (filmA.genre === film?.genre) && filmA.id !== film?.id).slice(0, 4);
 
   const onPlayButtonClickHandler = () => {
     const path = `/player/${film?.id}`;
@@ -26,6 +28,11 @@ function MoviePageScreen(): JSX.Element {
   const style = {
     backgroundColor: `${film?.backgroundColor}`
   };
+
+  useEffect(() => {
+    dispatch(fetchFilm(params?.id));
+    dispatch(fetchSimilarFilms(params?.id));
+  }, []);
 
   return (
     <>
