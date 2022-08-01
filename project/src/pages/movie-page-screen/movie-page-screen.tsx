@@ -5,11 +5,7 @@ import SimilarFilmsList from '../../components/similar-films-list/similar-films-
 import Tabs from '../../components/tabs/tabs';
 import { useAppSelector } from '../../hooks';
 
-type MoviePageScreenProps = {
-  authorizationStatus: boolean;
-}
-
-function MoviePageScreen({authorizationStatus}: MoviePageScreenProps): JSX.Element {
+function MoviePageScreen(): JSX.Element {
   const films = useAppSelector((state) => state.films);
   const favoriteFilmsLength = useAppSelector((state) => state.films).filter((filmA) => filmA.isFavorite).length;
   const navigate = useNavigate();
@@ -41,7 +37,7 @@ function MoviePageScreen({authorizationStatus}: MoviePageScreenProps): JSX.Eleme
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
-          <Header isLogined={authorizationStatus}/>
+          <Header />
 
           <div className="film-card__wrap">
             <div className="film-card__desc">

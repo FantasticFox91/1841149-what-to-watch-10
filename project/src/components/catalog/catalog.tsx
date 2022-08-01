@@ -9,9 +9,9 @@ import GenresList from '../genres-list/genres-list';
 function Catalog({films} : {films: Film[]}): JSX.Element {
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(resetFilmsList({filmsToShow: CARDS_PER_STEP, genre: INITAL_FILMS_GENRE}));
-  // });
+  useEffect(() => {
+    dispatch(resetFilmsList({filmsToShow: CARDS_PER_STEP, genre: INITAL_FILMS_GENRE}));
+  });
 
   return (
     <section className="catalog">

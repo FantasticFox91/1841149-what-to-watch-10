@@ -6,18 +6,18 @@ import { Film } from '../types/films';
 type InitialState = {
   genre: string;
   films: Film[],
-  promo: Film | null,
+  promoFilm: Film | null,
   renderedFilmCount: number,
-  isDataLoaded: boolean;
+  isDataLoading: boolean;
   authorizationStatus: AuthorizationStatus,
 }
 
 const initialState: InitialState = {
   genre: INITAL_FILMS_GENRE,
   films: [],
-  promo: null,
+  promoFilm: null,
   renderedFilmCount: 8,
-  isDataLoaded: false,
+  isDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
 };
 
@@ -38,13 +38,13 @@ const reducer = createReducer(initialState, (builder) => {
       state.films = action.payload;
     })
     .addCase(loadPromo, (state, action) => {
-      state.promo = action.payload;
+      state.promoFilm = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setDataLoadedStatus, (state, action) => {
-      state.isDataLoaded = action.payload;
+      state.isDataLoading = action.payload;
     });
 });
 
