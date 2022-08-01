@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import MoviePage from '../../pages/movie-page-screen/movie-page-screen';
@@ -12,7 +11,6 @@ import PrivateRoute from '../private-route/private-route';
 
 
 function App(): JSX.Element {
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
   return (
     <BrowserRouter>
       <Routes>
@@ -31,9 +29,7 @@ function App(): JSX.Element {
           path={AppRoute.MyList}
           element=
             {
-              <PrivateRoute
-                authorizationStatus={authStatus}
-              >
+              <PrivateRoute >
                 <MyListScreen />
               </PrivateRoute>
             }
@@ -46,9 +42,7 @@ function App(): JSX.Element {
           path={AppRoute.AddReview}
           element=
             {
-              <PrivateRoute
-                authorizationStatus={authStatus}
-              >
+              <PrivateRoute >
                 <AddReviewScreen />
               </PrivateRoute>
             }

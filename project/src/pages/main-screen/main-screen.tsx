@@ -9,7 +9,6 @@ import LoadingScreen from '../loading-screen/loading-screen';
 function MainScreen(): JSX.Element {
   const navigate = useNavigate();
   const favoriteFilmsLength = useAppSelector((state) => state.films).filter((filmA) => filmA.isFavorite).length;
-  const films = useAppSelector((state) => state.films);
   const promoFilm = useAppSelector((state) => state.promoFilm);
   const isDataLoading = useAppSelector((state) => state.isDataLoading);
 
@@ -75,7 +74,7 @@ function MainScreen(): JSX.Element {
       </section>
 
       <div className="page-content">
-        <Catalog films={films}/>
+        <Catalog />
 
         <Footer />
       </div>
