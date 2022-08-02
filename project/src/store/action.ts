@@ -28,4 +28,6 @@ export const loadSimilarFilms = createAction('data/loadSimilarFilms', (value) =>
 
 export const loadPromo = createAction<Film>('data/loadPromo');
 
+export const setError = createAction<string | null>('user/setError');
+
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');

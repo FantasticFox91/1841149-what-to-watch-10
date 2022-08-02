@@ -39,4 +39,6 @@ const INITAL_FILMS_GENRE = 'All genres';
 
 const CARDS_PER_STEP = 8;
 
-export { AppRoute, AuthorizationStatus, APIRoute, INITAL_FILMS_GENRE, CARDS_PER_STEP, GENRE_TABS };
+const TIMEOUT_SHOW_ERROR = 2000;
+
+export { AppRoute, AuthorizationStatus, APIRoute, INITAL_FILMS_GENRE, CARDS_PER_STEP, GENRE_TABS, TIMEOUT_SHOW_ERROR };

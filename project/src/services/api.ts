@@ -1,5 +1,7 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { getToken } from './token';
+import { StatusCodes } from 'http-status-codes';
+import { processErrorHandle } from './error-handler';
 
 const BACKEND_URL = 'https://10.react.pages.academy/wtw';
 const REQUEST_TIMEOUT = 5000;
@@ -22,5 +24,18 @@ export const createAPI = (): AxiosInstance => {
     },
   );
 
+  api.interceptors.response.use(
+    (response: AxiosResponse) => response,
+    (error: AxiosError) => {
+      const { response } = error;
+      if (response?.status === StatusCodes.BAD_REQUEST) {
+        processErrorHandle('Error with authorization');
+      }
+
+      throw error;
+    }
+  );
+
   return api;
 };
+
