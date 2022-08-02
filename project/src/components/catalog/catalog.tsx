@@ -10,7 +10,7 @@ function Catalog(): JSX.Element {
 
   useEffect(() => {
     dispatch(resetFilmsList({filmsToShow: CARDS_PER_STEP, genre: INITAL_FILMS_GENRE}));
-  }, []);
+  }, [dispatch]);
 
   return (
     <section className="catalog">

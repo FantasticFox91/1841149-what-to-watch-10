@@ -37,7 +37,7 @@ function MoviePageScreen(): JSX.Element {
     dispatch(fetchFilm(params?.id));
     dispatch(fetchSimilarFilms(params?.id));
     dispatch(fetchFilmComments(params?.id));
-  }, [params?.id]);
+  }, [params?.id, dispatch]);
 
   return (
     <>

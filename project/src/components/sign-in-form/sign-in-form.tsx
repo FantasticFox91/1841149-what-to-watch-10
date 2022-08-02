@@ -28,7 +28,7 @@ function SignInForm(): JSX.Element {
     if (authStatus === AuthorizationStatus.Auth) {
       navigate(AppRoute.Root);
     }
-  }, [authStatus]);
+  }, [authStatus, navigate]);
 
 
   return (

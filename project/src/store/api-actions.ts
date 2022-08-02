@@ -139,9 +139,9 @@ export const addReviewAction = createAsyncThunk<void, [(string | undefined),addR
   'data/addReview',
   async ([filmID, {comment , rating}], {dispatch, extra: api}) => {
     try {
-      const { data } = await api.post<ReviewData>(`${APIRoute.Comments}/${filmID}`, {comment, rating});
+      await api.post<ReviewData>(`${APIRoute.Comments}/${filmID}`, {comment, rating});
     } catch (e){
       setError(e);
     }
   },
-);
+  );
