@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { AppRoute } from '../../const';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import MoviePage from '../../pages/movie-page-screen/movie-page-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
@@ -13,14 +11,6 @@ import PrivateRoute from '../private-route/private-route';
 
 
 function App(): JSX.Element {
-  const {authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
-
-  if (isDataLoaded) {
-    return (
-      <LoadingScreen />
-    );
-  }
-
   return (
     <BrowserRouter>
       <Routes>
@@ -28,7 +18,7 @@ function App(): JSX.Element {
           path={AppRoute.Root}
           element=
             {
-              <MainScreen authorizationStatus={authorizationStatus === AuthorizationStatus.Auth}/>
+              <MainScreen />
             }
         />
         <Route
@@ -39,14 +29,12 @@ function App(): JSX.Element {
           path={AppRoute.MyList}
           element=
             {
-              <PrivateRoute
-                authorizationStatus={authorizationStatus}
-              >
-                <MyListScreen authorizationStatus={authorizationStatus === AuthorizationStatus.Auth}/>
+              <PrivateRoute >
+                <MyListScreen />
               </PrivateRoute>
             }
         />
-        <Route path={AppRoute.Film} element={<MoviePage authorizationStatus={authorizationStatus === AuthorizationStatus.Auth}/>} />
+        <Route path={AppRoute.Film} element={<MoviePage />} />
         <Route path={AppRoute.Player} element={<PlayerScreen />}>
           <Route path=":id" element={<PlayerScreen />} />
         </Route>
@@ -54,16 +42,14 @@ function App(): JSX.Element {
           path={AppRoute.AddReview}
           element=
             {
-              <PrivateRoute
-                authorizationStatus={authorizationStatus}
-              >
+              <PrivateRoute >
                 <AddReviewScreen />
               </PrivateRoute>
             }
         />
         <Route
           path={AppRoute.NotFound}
-          element={<PageNotFoundScreen authorizationStatus={authorizationStatus === AuthorizationStatus.Auth}/>}
+          element={<PageNotFoundScreen />}
         />
       </Routes>
     </BrowserRouter>

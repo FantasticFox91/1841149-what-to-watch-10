@@ -1,10 +1,10 @@
 import { useAppSelector } from '../../hooks';
-import { Film } from '../../types/films';
 import ShowMoreButton from '../show-more-button/show-more-button';
 import VideoPlayer from '../video-player/video-player';
 
-function FilmsListWithButton({films} : {films: Film[]}): JSX.Element {
+function FilmsListWithButton(): JSX.Element {
   const selectedGenre = useAppSelector((state) => state.genre);
+  const films = useAppSelector((state) => state.films);
 
   const sortedFilms = films.filter((film) => selectedGenre === 'All genres' ? films : film.genre === selectedGenre);
 

@@ -3,16 +3,14 @@ import Footer from '../../components/footer/footer';
 import { useNavigate } from 'react-router-dom';
 import Catalog from '../../components/catalog/catalog';
 import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-type MainScreeenProps = {
-  authorizationStatus: boolean;
-}
 
-function MainScreen({authorizationStatus}: MainScreeenProps): JSX.Element {
+function MainScreen(): JSX.Element {
   const navigate = useNavigate();
   const favoriteFilmsLength = useAppSelector((state) => state.films).filter((filmA) => filmA.isFavorite).length;
-  const films = useAppSelector((state) => state.films);
-  const promoFilm = useAppSelector((state) => state.promo);
+  const promoFilm = useAppSelector((state) => state.promoFilm);
+  const isDataLoading = useAppSelector((state) => state.isDataLoading);
 
   const myListButtonClickHandler = () => {
     const path = '/mylist';
@@ -24,6 +22,13 @@ function MainScreen({authorizationStatus}: MainScreeenProps): JSX.Element {
     navigate(path);
   };
 
+
+  if (isDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <>
       <section className="film-card">
@@ -33,7 +38,7 @@ function MainScreen({authorizationStatus}: MainScreeenProps): JSX.Element {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header isLogined={authorizationStatus}/>
+        <Header />
 
         <div className="film-card__wrap">
           <div className="film-card__info">
@@ -69,7 +74,7 @@ function MainScreen({authorizationStatus}: MainScreeenProps): JSX.Element {
       </section>
 
       <div className="page-content">
-        <Catalog films={films}/>
+        <Catalog />
 
         <Footer />
       </div>
