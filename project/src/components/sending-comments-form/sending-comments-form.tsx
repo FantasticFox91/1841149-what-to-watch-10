@@ -1,10 +1,16 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, FormEvent } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { addReviewAction } from '../../store/api-actions';
 
 function SendingCommentsForm(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const params = useParams();
   const [formData, setFormData] = useState({
     rating: '',
     'review-text': '',
   });
+
 
   const fieldChangeHandler = (evt: ChangeEvent<(HTMLInputElement | HTMLTextAreaElement)>) => {
     const {name, value} = evt.target;
@@ -20,8 +26,20 @@ function SendingCommentsForm(): JSX.Element {
       </>);
   });
 
+  const onReviewFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const sendingFormData = {
+      rating: Number(formData.rating),
+      comment: formData['review-text'],
+    };
+
+    if (formData.rating && formData['review-text']) {
+      dispatch(addReviewAction([params?.id, sendingFormData]));
+    }
+  };
+
   return (
-    <form action="#" className="add-review__form">
+    <form action="#" className="add-review__form" onSubmit={onReviewFormSubmit}>
       <div className="rating">
         <div className="rating__stars">
           {starsButtonList}

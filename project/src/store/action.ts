@@ -22,12 +22,16 @@ export const loadFilm = createAction('data/loadFilm', (value) => ({
   payload: value,
 }));
 
+export const loadFilmComments = createAction('data/loadFilmComments', (value) => ({
+  payload: value,
+}));
+
 export const loadSimilarFilms = createAction('data/loadSimilarFilms', (value) => ({
   payload: value,
 }));
 
 export const loadPromo = createAction<Film>('data/loadPromo');
 
-export const setError = createAction<string | null>('user/setError');
+export const setError = createAction<string | null | unknown>('user/setError');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');

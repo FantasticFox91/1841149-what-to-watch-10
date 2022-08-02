@@ -1,18 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { resetFilmsList, showAnotherGenre, showMoreFilms, loadFilms, setDataLoadedStatus, requireAuthorization, loadPromo, loadFilm, loadSimilarFilms, setError } from './action';
+import { resetFilmsList, showAnotherGenre, showMoreFilms, loadFilms, setDataLoadedStatus, requireAuthorization, loadPromo, loadFilm, loadSimilarFilms, setError, loadFilmComments } from './action';
 import { CARDS_PER_STEP, INITAL_FILMS_GENRE, AuthorizationStatus } from '../const';
 import { Film } from '../types/films';
+import { ReviewData } from '../types/review-data';
 
 type InitialState = {
   genre: string;
   films: Film[],
+  filmComments: ReviewData[] | [],
   promoFilm: Film | null,
   renderedFilmCount: number,
   isDataLoading: boolean;
   authorizationStatus: AuthorizationStatus,
   film: Film | null,
   similarFilms: Film[],
-  error: string | null,
+  error: string | null | unknown,
 }
 
 const initialState: InitialState = {
@@ -23,6 +25,7 @@ const initialState: InitialState = {
   isDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   film: null,
+  filmComments: [],
   similarFilms: [],
   error: null,
 };
@@ -48,6 +51,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadFilm, (state, action) => {
       state.film = action.payload;
+    })
+    .addCase(loadFilmComments, (state, action) => {
+      state.filmComments = action.payload;
     })
     .addCase(loadSimilarFilms, (state, action) => {
       state.similarFilms = action.payload;
