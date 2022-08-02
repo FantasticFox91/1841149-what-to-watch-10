@@ -1,17 +1,21 @@
 import { useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import AddReviewButton from '../../components/add-review-button/add-review-button';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SimilarFilmsList from '../../components/similar-films-list/similar-films-list';
 import Tabs from '../../components/tabs/tabs';
+import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
+import { fetchFilm, fetchFilmComments, fetchSimilarFilms } from '../../store/api-actions';
 
 function MoviePageScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const film = useAppSelector((state) => state.film);
   const similarFilms = useAppSelector((state) => state.similarFilms);
+  const authStatus = useAppSelector((state) => state.authorizationStatus);
   const favoriteFilmsLength = useAppSelector((state) => state.films).filter((filmA) => filmA.isFavorite).length;
+  const filmComments = useAppSelector((state) => state.filmComments);
   const navigate = useNavigate();
   const params = useParams();
 
@@ -32,7 +36,8 @@ function MoviePageScreen(): JSX.Element {
   useEffect(() => {
     dispatch(fetchFilm(params?.id));
     dispatch(fetchSimilarFilms(params?.id));
-  }, []);
+    dispatch(fetchFilmComments(params?.id));
+  }, [params?.id, dispatch]);
 
   return (
     <>
@@ -67,7 +72,7 @@ function MoviePageScreen(): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">{favoriteFilmsLength}</span>
                 </button>
-                <Link to={`/films/${film?.id}/review`} className="btn film-card__button">Add review</Link>
+                {authStatus === AuthorizationStatus.Auth ? <AddReviewButton id={film?.id} /> : null}
               </div>
             </div>
           </div>
@@ -80,7 +85,7 @@ function MoviePageScreen(): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <Tabs film={film || null}/>
+              <Tabs film={film || null} comments={filmComments}/>
             </div>
           </div>
         </div>

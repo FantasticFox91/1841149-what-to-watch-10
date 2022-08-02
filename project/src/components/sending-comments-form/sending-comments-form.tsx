@@ -1,6 +1,13 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, FormEvent } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { addReviewAction } from '../../store/api-actions';
 
 function SendingCommentsForm(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const params = useParams();
   const [formData, setFormData] = useState({
     rating: '',
     'review-text': '',
@@ -20,8 +27,21 @@ function SendingCommentsForm(): JSX.Element {
       </>);
   });
 
+  const onReviewFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const sendingFormData = {
+      rating: Number(formData.rating),
+      comment: formData['review-text'],
+    };
+
+    if (formData.rating && formData['review-text']) {
+      dispatch(addReviewAction([params?.id, sendingFormData]));
+      navigate(`${AppRoute.MoviePage}${params?.id}`);
+    }
+  };
+
   return (
-    <form action="#" className="add-review__form">
+    <form action="#" className="add-review__form" onSubmit={onReviewFormSubmit}>
       <div className="rating">
         <div className="rating__stars">
           {starsButtonList}

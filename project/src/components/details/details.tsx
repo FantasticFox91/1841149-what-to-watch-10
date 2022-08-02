@@ -1,11 +1,15 @@
 import { Film } from '../../types/films';
+import DetailsStar from '../details-star/details-star';
+import './details.css';
 
 type DetailsProps = {
   film: Film | null;
 }
 
 function Details({film}: DetailsProps): JSX.Element {
-  const actorsList = film?.starring[0].split(',').map((star) => `${star}`, '');
+  const actorsList = film?.starring?.map((star) =>
+    <DetailsStar key={star} star={star} />
+  );
 
   const huminazeFilmDuration = (minutes: number): string | null => {
     const MINUTES_IN_HOUR = 60;
@@ -27,9 +31,7 @@ function Details({film}: DetailsProps): JSX.Element {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
-          <span className="film-card__details-value" >
-            {actorsList}
-          </span>
+          {actorsList}
         </p>
       </div>
 
