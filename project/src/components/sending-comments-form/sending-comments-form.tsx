@@ -1,16 +1,17 @@
 import { ChangeEvent, useState, FormEvent } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
 
 function SendingCommentsForm(): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const [formData, setFormData] = useState({
     rating: '',
     'review-text': '',
   });
-
 
   const fieldChangeHandler = (evt: ChangeEvent<(HTMLInputElement | HTMLTextAreaElement)>) => {
     const {name, value} = evt.target;
@@ -35,6 +36,7 @@ function SendingCommentsForm(): JSX.Element {
 
     if (formData.rating && formData['review-text']) {
       dispatch(addReviewAction([params?.id, sendingFormData]));
+      navigate(`${AppRoute.MoviePage}${params?.id}`);
     }
   };
 
