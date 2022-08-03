@@ -1,31 +1,40 @@
 import { useState } from 'react';
-import { Film } from '../../types/films';
-import { ReviewData } from '../../types/review-data';
 import Details from '../details/details';
 import Overview from '../overview/overview';
 import Reviews from '../reviews/reviews';
 
-type TabsProps = {
-  film: Film | null;
-  comments: ReviewData[] | [];
+enum TabsName {
+  OVERVIEW = 'Overview',
+  DETAILS = 'Details',
+  REVIEWS = 'Reviews',
 }
 
-function Tabs({film, comments}: TabsProps): JSX.Element {
-  const [activeTab, setActiveTab] = useState('Overview');
+function Tabs(): JSX.Element {
+  const [activeTab, setActiveTab] = useState(TabsName.OVERVIEW);
   const onTabClickHandler = (e: React.MouseEvent) => {
     if (e.currentTarget.textContent !== null) {
-      setActiveTab(e.currentTarget.textContent);
+      switch(e.currentTarget.textContent) {
+        case TabsName.OVERVIEW:
+          setActiveTab(TabsName.OVERVIEW);
+          break;
+        case TabsName.DETAILS:
+          setActiveTab(TabsName.DETAILS);
+          break;
+        case TabsName.REVIEWS:
+          setActiveTab(TabsName.REVIEWS);
+          break;
+      }
     }
   };
 
   const renderSwitch = (tab: string) => {
     switch(tab) {
-      case 'Overview':
-        return <Overview film={film} />;
-      case 'Details':
-        return <Details film={film} />;
-      case 'Reviews':
-        return <Reviews comments={comments} />;
+      case TabsName.OVERVIEW:
+        return <Overview />;
+      case TabsName.DETAILS:
+        return <Details />;
+      case TabsName.REVIEWS:
+        return <Reviews />;
     }
   };
 

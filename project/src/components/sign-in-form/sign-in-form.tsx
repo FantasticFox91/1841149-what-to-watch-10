@@ -2,15 +2,17 @@ import { useRef, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getError } from '../../store/add-review-process/selectors';
 import { loginAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import ErrorMessage from '../error-message/error-message';
 
 function SignInForm(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
-  const error = useAppSelector((state) => state.error);
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
+  const error = useAppSelector(getError);
+  const authStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
 
   const handleFromSubmit = (evt: FormEvent<HTMLFormElement>) => {

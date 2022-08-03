@@ -1,0 +1,41 @@
+import { createSlice } from '@reduxjs/toolkit';
+import { NameSpace } from '../../const';
+import { FilmProcess } from '../../types/state';
+import { fetchFilm, fetchFilmComments, fetchSimilarFilms } from '../api-actions';
+
+const initialState: FilmProcess = {
+  film: null,
+  filmComments: [],
+  similarFilms: [],
+  isDataLoading: false,
+};
+
+export const filmProcess = createSlice({
+  name: NameSpace.Film,
+  initialState,
+  reducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(fetchFilm.pending, (state) => {
+        state.isDataLoading = true;
+      })
+      .addCase(fetchFilm.fulfilled, (state, action) => {
+        state.film = action.payload;
+        state.isDataLoading = false;
+      })
+      .addCase(fetchSimilarFilms.pending, (state) => {
+        state.isDataLoading = true;
+      })
+      .addCase(fetchSimilarFilms.fulfilled, (state, action) => {
+        state.similarFilms = action.payload;
+        state.isDataLoading = false;
+      })
+      .addCase(fetchFilmComments.pending, (state) => {
+        state.isDataLoading = true;
+      })
+      .addCase(fetchFilmComments.fulfilled, (state, action) => {
+        state.filmComments = action.payload;
+        state.isDataLoading = false;
+      });
+  }
+});

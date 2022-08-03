@@ -4,13 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import Catalog from '../../components/catalog/catalog';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
-
+import { getPromoFilm } from '../../store/promo-film-process/selector';
+import { getFilms } from '../../store/films-process/selector';
+import { getLoadingDataStatus } from '../../store/film-process/selectors';
 
 function MainScreen(): JSX.Element {
   const navigate = useNavigate();
-  const favoriteFilmsLength = useAppSelector((state) => state.films).filter((filmA) => filmA.isFavorite).length;
-  const promoFilm = useAppSelector((state) => state.promoFilm);
-  const isDataLoading = useAppSelector((state) => state.isDataLoading);
+  const favoriteFilmsLength = useAppSelector(getFilms).filter((filmA) => filmA.isFavorite).length;
+  const promoFilm = useAppSelector(getPromoFilm);
+  const isDataLoading = useAppSelector(getLoadingDataStatus);
 
   const myListButtonClickHandler = () => {
     const path = '/mylist';

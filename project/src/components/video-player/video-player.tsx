@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
+import { getRenderedFilmCount } from '../../store/genre-process/selector';
 import { Film } from '../../types/films';
 
 type VideoPlayerProps = {
@@ -11,7 +12,8 @@ type VideoPlayerProps = {
 function VideoPlayer({film, index}: VideoPlayerProps): JSX.Element | null {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const isVisible = useAppSelector((state) => index < state.renderedFilmCount);
+  const renderedFilmCount = useAppSelector(getRenderedFilmCount);
+  const isVisible = useAppSelector((state) => index < renderedFilmCount);
 
   useEffect(() => {
     if (videoRef.current === null) {

@@ -1,12 +1,10 @@
-import { Film } from '../../types/films';
+import { useAppSelector } from '../../hooks';
+import { getFilm } from '../../store/film-process/selectors';
 import DetailsStar from '../details-star/details-star';
 import './details.css';
 
-type DetailsProps = {
-  film: Film | null;
-}
-
-function Details({film}: DetailsProps): JSX.Element {
+function Details(): JSX.Element {
+  const film = useAppSelector(getFilm);
   const actorsList = film?.starring?.map((star) =>
     <DetailsStar key={star} star={star} />
   );

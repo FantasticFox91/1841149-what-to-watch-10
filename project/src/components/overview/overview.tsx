@@ -1,10 +1,8 @@
-import { Film } from '../../types/films';
+import { useAppSelector } from '../../hooks';
+import { getFilm } from '../../store/film-process/selectors';
 
-type OverviewProps = {
-  film: Film | null;
-}
-
-function Overview({film}: OverviewProps): JSX.Element {
+function Overview(): JSX.Element {
+  const film = useAppSelector(getFilm);
   return (
     <>
       <div className="film-rating">
