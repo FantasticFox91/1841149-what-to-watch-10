@@ -6,7 +6,7 @@ type ReviewCardProp = {
 }
 
 function ReviewCard({comment}: ReviewCardProp): JSX.Element {
-  const dateVelue = dayjs(comment.date).format('YYYY-DD-MM');
+  const dateValue = dayjs(comment.date).format('YYYY-DD-MM');
   const humanizedDate = dayjs(comment.date).format('MMMM DD, YYYY');
   return (
     <div className="review">
@@ -15,7 +15,7 @@ function ReviewCard({comment}: ReviewCardProp): JSX.Element {
 
         <footer className="review__details">
           <cite className="review__author">{comment.user.name}</cite>
-          <time className="review__date" dateTime={dateVelue}>{humanizedDate}</time>
+          <time className="review__date" dateTime={dateValue}>{humanizedDate}</time>
         </footer>
       </blockquote>
 

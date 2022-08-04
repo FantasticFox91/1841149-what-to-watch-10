@@ -1,6 +1,4 @@
 import { createAction } from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../const';
-import { Film } from '../types/films';
 
 export const showAnotherGenre = createAction('films/showAnotherGenre', (value) => ({
   payload: value,
@@ -14,24 +12,6 @@ export const resetFilmsList = createAction('films/resetFilmsList', (value) => ({
   payload: value,
 }));
 
-export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
-
-export const loadFilms = createAction<Film[]>('data/loadFilms');
-
-export const loadFilm = createAction('data/loadFilm', (value) => ({
+export const setError = createAction('user/setError',(value) => ({
   payload: value,
 }));
-
-export const loadFilmComments = createAction('data/loadFilmComments', (value) => ({
-  payload: value,
-}));
-
-export const loadSimilarFilms = createAction('data/loadSimilarFilms', (value) => ({
-  payload: value,
-}));
-
-export const loadPromo = createAction<Film>('data/loadPromo');
-
-export const setError = createAction<string | null | unknown>('user/setError');
-
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');

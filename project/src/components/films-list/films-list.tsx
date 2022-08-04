@@ -7,8 +7,8 @@ type FilmListProps = {
 
 function FilmsList({films}: FilmListProps): JSX.Element {
   const filmsList =
-      films.map((film, index) => (
-        <VideoPlayer key={film.id} film={film} index={index}/>
+      films.map((film) => (
+        <VideoPlayer key={film.id} film={film} />
       ));
 
   return (

@@ -7,15 +7,17 @@ import SimilarFilmsList from '../../components/similar-films-list/similar-films-
 import Tabs from '../../components/tabs/tabs';
 import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilm, fetchFilmComments, fetchSimilarFilms } from '../../store/api-actions';
+import { fetchFilm } from '../../store/api-actions';
+import { getFilm } from '../../store/film-process/selectors';
+import { getFilms } from '../../store/films-process/selector';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function MoviePageScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const film = useAppSelector((state) => state.film);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
-  const favoriteFilmsLength = useAppSelector((state) => state.films).filter((filmA) => filmA.isFavorite).length;
-  const filmComments = useAppSelector((state) => state.filmComments);
+  const film = useAppSelector(getFilm);
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const favoriteFilmsLength = useAppSelector(getFilms).filter((filmA) => filmA.isFavorite).length;
+
   const navigate = useNavigate();
   const params = useParams();
 
@@ -35,8 +37,6 @@ function MoviePageScreen(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchFilm(params?.id));
-    dispatch(fetchSimilarFilms(params?.id));
-    dispatch(fetchFilmComments(params?.id));
   }, [params?.id, dispatch]);
 
   return (
@@ -85,14 +85,14 @@ function MoviePageScreen(): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <Tabs film={film || null} comments={filmComments}/>
+              <Tabs />
             </div>
           </div>
         </div>
       </section>
 
       <div className="page-content">
-        <SimilarFilmsList similarFilms={similarFilms} />
+        <SimilarFilmsList />
         <Footer />
       </div>
     </>

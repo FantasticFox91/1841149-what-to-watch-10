@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { GENRE_TABS } from '../../const';
+import { GENRES_LIST } from '../../const';
 import GenreButton from '../genre-button/genre-button';
 import { showAnotherGenre } from '../../store/action';
-
+import { getGenre } from '../../store/genre-process/selector';
 
 function GenresList(): JSX.Element {
-  const selectedGenre = useAppSelector((state) => state.genre);
+  const selectedGenre = useAppSelector(getGenre);
 
   const dispatch = useAppDispatch();
 
@@ -17,7 +17,7 @@ function GenresList(): JSX.Element {
   };
 
   const generateGenreTab =
-  GENRE_TABS.map((genre) => (
+  GENRES_LIST.map((genre) => (
     <GenreButton key={genre} genre={genre} isActive={selectedGenre === genre} onClick={onTabClickHandler} />
   ));
 

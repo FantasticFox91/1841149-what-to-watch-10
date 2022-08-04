@@ -27,7 +27,7 @@ function SendingCommentsForm(): JSX.Element {
       </>);
   });
 
-  const onReviewFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleReviewFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const sendingFormData = {
       rating: Number(formData.rating),
@@ -41,7 +41,7 @@ function SendingCommentsForm(): JSX.Element {
   };
 
   return (
-    <form action="#" className="add-review__form" onSubmit={onReviewFormSubmit}>
+    <form action="#" className="add-review__form" onSubmit={handleReviewFormSubmit}>
       <div className="rating">
         <div className="rating__stars">
           {starsButtonList}

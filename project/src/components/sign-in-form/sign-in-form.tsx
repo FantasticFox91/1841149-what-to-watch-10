@@ -3,14 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { getAuthorizationStatus, getError } from '../../store/user-process/selectors';
 import ErrorMessage from '../error-message/error-message';
 
 function SignInForm(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
-  const error = useAppSelector((state) => state.error);
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
+  const error = useAppSelector(getError);
+  const authStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
 
   const handleFromSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -24,12 +25,12 @@ function SignInForm(): JSX.Element {
     }
   };
 
+
   useEffect(() => {
     if (authStatus === AuthorizationStatus.Auth) {
       navigate(AppRoute.Root);
     }
   }, [authStatus, navigate]);
-
 
   return (
     <form action="#" className="sign-in__form" onSubmit={handleFromSubmit}>

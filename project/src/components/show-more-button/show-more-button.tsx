@@ -1,15 +1,16 @@
 import { CARDS_PER_STEP } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { showMoreFilms } from '../../store/action';
+import { getRenderedFilmCount } from '../../store/genre-process/selector';
 import { Film } from '../../types/films';
 
 type ShowMoreButtonProps = {
-  sortedFilms: Film[];
+  sortedFilms: Film[] | [];
 }
 
 function ShowMoreButton({sortedFilms}: ShowMoreButtonProps): JSX.Element | null {
   const dispatch = useAppDispatch();
-  const filmsToShow = useAppSelector((state) => state.renderedFilmCount);
+  const filmsToShow = useAppSelector(getRenderedFilmCount);
 
   const onShowMoreButtonClickHandler = () => {
     dispatch(showMoreFilms(filmsToShow + CARDS_PER_STEP));
