@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { AddReviewProcess } from '../../types/state';
 import { addReviewAction } from '../api-actions';
+import { AddReviewProcess } from '../../types/state';
 
 const initialState: AddReviewProcess = {
-  error: null,
   isDataLoading: false,
 };
 
@@ -17,8 +16,7 @@ export const addReviewProcess = createSlice({
       .addCase(addReviewAction.pending, (state) => {
         state.isDataLoading = true;
       })
-      .addCase(addReviewAction.rejected, (state, action) => {
-        state.error = action.payload;
+      .addCase(addReviewAction.rejected, (state) => {
         state.isDataLoading = false;
       })
       .addCase(addReviewAction.fulfilled, (state) => {

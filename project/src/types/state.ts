@@ -5,6 +5,7 @@ import { errorReviewData, ReviewData } from '../types/review-data';
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus
+  error: errorReviewData | null | unknown;
 };
 
 export type FilmsProcess = {
@@ -25,7 +26,6 @@ export type GenreProcess = {
 };
 
 export type AddReviewProcess = {
-  error: errorReviewData | null | unknown;
   isDataLoading: boolean;
 };
 

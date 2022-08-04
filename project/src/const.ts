@@ -38,7 +38,7 @@ enum GENRE_TABS {
   CRIME = 'Crime',
   DOCUMENTARY = 'Documentary',
   DRAMA = 'Drama',
-  HOTRROR = 'Horror',
+  HORROR = 'Horror',
   KIDS_AND_FAMILY = 'Kids & Family',
   ROMANCE = 'Romance',
   SCI_FI = 'Sci-Fi',

@@ -5,7 +5,7 @@ import { getRenderedFilmCount } from '../../store/genre-process/selector';
 import { Film } from '../../types/films';
 
 type ShowMoreButtonProps = {
-  sortedFilms: Film[];
+  sortedFilms: Film[] | [];
 }
 
 function ShowMoreButton({sortedFilms}: ShowMoreButtonProps): JSX.Element | null {

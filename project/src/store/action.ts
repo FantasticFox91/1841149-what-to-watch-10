@@ -11,3 +11,7 @@ export const showMoreFilms = createAction('films/showMoreFilms', (value) => ({
 export const resetFilmsList = createAction('films/resetFilmsList', (value) => ({
   payload: value,
 }));
+
+export const setError = createAction('user/setError',(value) => ({
+  payload: value,
+}));
