@@ -7,6 +7,7 @@ import { APIRoute, AppRoute } from '../const';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { addReviewData, errorReviewData, ReviewData } from '../types/review-data';
+import { FavouriteData } from '../types/favourite-data';
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
@@ -40,6 +41,42 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+  },
+);
+
+export const fetchFavouriteFilms = createAsyncThunk<Film[] | [], undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'favorite/fetchFavouriteFilms',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<Film[] | []>(APIRoute.Favourite);
+    return data;
+  },
+);
+
+export const changeFavouriteFilmStatus = createAsyncThunk<Film, FavouriteData, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'favorite/changeFavouriteFilmStatus',
+  async ({filmId, filmStatus}, { extra: api }) => {
+    const { data } = await api.post<Film>(`${APIRoute.Favourite}/${filmId}/${Number(!filmStatus)}`);
+    return data;
+  },
+);
+
+export const fetchFavFilm = createAsyncThunk<Film, string | undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'favorite/fetchFavFilm',
+  async (filmId, { extra: api }) => {
+    const { data } = await api.get<Film>(`${AppRoute.MoviePage}${filmId}`);
+    return data;
   },
 );
 

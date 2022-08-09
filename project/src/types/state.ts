@@ -14,6 +14,7 @@ export type FilmsProcess = {
 };
 
 export type FilmProcess = {
+  promoFilm: Film | null;
   film: Film | null;
   filmComments: ReviewData[] | [];
   similarFilms: Film[] | [];
@@ -29,8 +30,8 @@ export type AddReviewProcess = {
   isDataLoading: boolean;
 };
 
-export type PromoFilmProcess = {
-  promoFilm: Film | null;
+export type FavoriteFilmsProcess = {
+  favoriteFilms: Film[] | [];
   isDataLoading: boolean;
 };
 

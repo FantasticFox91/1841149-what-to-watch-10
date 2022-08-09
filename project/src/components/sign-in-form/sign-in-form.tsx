@@ -2,7 +2,7 @@ import { useRef, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { loginAction } from '../../store/api-actions';
+import { fetchFavouriteFilms, loginAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getError } from '../../store/user-process/selectors';
 import ErrorMessage from '../error-message/error-message';
 
@@ -22,6 +22,7 @@ function SignInForm(): JSX.Element {
         login: loginRef.current.value,
         password: passwordRef.current.value,
       }));
+      dispatch(fetchFavouriteFilms());
     }
   };
 

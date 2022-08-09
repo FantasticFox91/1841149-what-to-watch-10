@@ -1,28 +1,41 @@
-import { ChangeEvent, useState, FormEvent } from 'react';
+import { ChangeEvent, useState, FormEvent, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getLoadingStatus } from '../../store/add-review-process/selectors';
 import { addReviewAction } from '../../store/api-actions';
 
 function SendingCommentsForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const loadingStatus = useAppSelector(getLoadingStatus);
   const params = useParams();
   const [formData, setFormData] = useState({
     rating: '',
     'review-text': '',
   });
+  const [isDisable, setDisable] = useState(true);
 
   const fieldChangeHandler = (evt: ChangeEvent<(HTMLInputElement | HTMLTextAreaElement)>) => {
     const {name, value} = evt.target;
     setFormData({...formData, [name]: value});
   };
 
+  useEffect(() => {
+    if (formData.rating === '') {
+      return setDisable(true);
+    }
+    if (formData['review-text'].length < 50 || formData['review-text'].length > 400) {
+      return setDisable(true);
+    }
+    setDisable(false);
+  }, [formData]);
+
   const starsButtonList = Array.from({length: 10}, (_, i) => {
     const key = String(10 - i);
     return (
       <>
-        <input className="rating__input" id={`star-${key}`} type="radio" name="rating" value={`${key}`} onChange={fieldChangeHandler} />
+        <input className="rating__input" id={`star-${key}`} type="radio" name="rating" value={`${key}`} onChange={fieldChangeHandler} disabled={loadingStatus}/>
         <label className="rating__label" htmlFor={`star-${key}`}>{`Rating ${key}`}</label>
       </>);
   });
@@ -49,9 +62,9 @@ function SendingCommentsForm(): JSX.Element {
       </div>
 
       <div className="add-review__text">
-        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange={fieldChangeHandler}></textarea>
+        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" minLength={50} maxLength={400} onChange={fieldChangeHandler}></textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button className="add-review__btn" type="submit" disabled={isDisable || loadingStatus}>Post</button>
         </div>
 
       </div>

@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { FilmProcess } from '../../types/state';
-import { fetchFilm, fetchFilmComments, fetchSimilarFilms } from '../api-actions';
+import { fetchFilm, fetchFilmComments, fetchSimilarFilms, fetchPromoAction } from '../api-actions';
 
 const initialState: FilmProcess = {
+  promoFilm: null,
   film: null,
   filmComments: [],
   similarFilms: [],
@@ -35,6 +36,13 @@ export const filmProcess = createSlice({
       })
       .addCase(fetchFilmComments.fulfilled, (state, action) => {
         state.filmComments = action.payload;
+        state.isDataLoading = false;
+      })
+      .addCase(fetchPromoAction.pending, (state) => {
+        state.isDataLoading = true;
+      })
+      .addCase(fetchPromoAction.fulfilled, (state, action) => {
+        state.promoFilm = action.payload;
         state.isDataLoading = false;
       });
   }
