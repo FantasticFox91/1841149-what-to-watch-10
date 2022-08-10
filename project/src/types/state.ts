@@ -1,5 +1,5 @@
 import { store } from '../store/index.js';
-import { AuthorizationStatus, GENRE_TABS } from '../const';
+import { AuthorizationStatus } from '../const';
 import { Film } from './films.js';
 import { errorReviewData, ReviewData } from '../types/review-data';
 
@@ -22,7 +22,7 @@ export type FilmProcess = {
 };
 
 export type GenreProcess = {
-  genre: GENRE_TABS;
+  genre: string;
   renderedFilmCount: number;
 };
 

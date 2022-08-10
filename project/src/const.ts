@@ -33,32 +33,6 @@ enum NameSpace {
   Favorite = 'FAVORITE',
 }
 
-enum GENRE_TABS {
-  ALL = 'All genres',
-  COMEDIE = 'Comedie',
-  CRIME = 'Crime',
-  DOCUMENTARY = 'Documentary',
-  DRAMA = 'Drama',
-  HORROR = 'Horror',
-  KIDS_AND_FAMILY = 'Kids & Family',
-  ROMANCE = 'Romance',
-  SCI_FI = 'Sci-Fi',
-  THRILLER = 'Thriller',
-}
-
-const GENRES_LIST = [
-  'All genres',
-  'Comedie',
-  'Crime',
-  'Documentary',
-  'Drama',
-  'Horror',
-  'Kids & Family',
-  'Romance',
-  'Sci-Fi',
-  'Thriller'
-];
-
 const INITAL_FILMS_GENRE = 'All genres';
 
 const CARDS_PER_STEP = 8;
@@ -67,4 +41,6 @@ const TIMEOUT_SHOW_ERROR = 2000;
 
 const MAX_ACTORS_IN_OVERVIEW = 4;
 
-export { AppRoute, AuthorizationStatus, APIRoute, NameSpace, GENRES_LIST, INITAL_FILMS_GENRE, CARDS_PER_STEP, GENRE_TABS, TIMEOUT_SHOW_ERROR, MAX_ACTORS_IN_OVERVIEW };
+const MAX_GENRES_TABS = 9;
+
+export { AppRoute, AuthorizationStatus, APIRoute, NameSpace, INITAL_FILMS_GENRE, CARDS_PER_STEP, TIMEOUT_SHOW_ERROR, MAX_ACTORS_IN_OVERVIEW, MAX_GENRES_TABS };

@@ -2,21 +2,32 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import { useNavigate } from 'react-router-dom';
 import Catalog from '../../components/catalog/catalog';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { getLoadingDataStatus, getPromoFilm } from '../../store/film-process/selectors';
 import MyListButton from '../../components/my-list-button/my-list-button';
+import { setFilm } from '../../store/action';
+import { useEffect } from 'react';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { AuthorizationStatus } from '../../const';
+import MyListButtonNoAuth from '../../components/my-list-button-no-auth/my-list-button-no-auth';
 
 function MainScreen(): JSX.Element {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const promoFilm = useAppSelector(getPromoFilm);
   const isDataLoading = useAppSelector(getLoadingDataStatus);
+  const authStatus = useAppSelector(getAuthorizationStatus);
 
   const playButtonClickHandler = () => {
     const path = `/player/${promoFilm?.id}`;
     navigate(path);
   };
 
+
+  useEffect(() => {
+    dispatch(setFilm(promoFilm));
+  }, [promoFilm, dispatch]);
 
   if (isDataLoading) {
     return (
@@ -55,7 +66,7 @@ function MainScreen(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <MyListButton />
+                {authStatus === AuthorizationStatus.Auth ? <MyListButton /> : <MyListButtonNoAuth />}
               </div>
             </div>
           </div>

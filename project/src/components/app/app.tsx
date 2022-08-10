@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import browserHistory from '../../browser-history';
 import { AppRoute } from '../../const';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
@@ -7,12 +8,12 @@ import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import PageNotFoundScreen from '../../pages/page-not-found-screen/page-not-found-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
+import HistoryRouter from '../history-route';
 import PrivateRoute from '../private-route/private-route';
-
 
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Root}
@@ -52,7 +53,7 @@ function App(): JSX.Element {
           element={<PageNotFoundScreen />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

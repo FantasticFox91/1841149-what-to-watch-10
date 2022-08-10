@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import AddReviewButton from '../../components/add-review-button/add-review-button';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
+import MyListButtonNoAuth from '../../components/my-list-button-no-auth/my-list-button-no-auth';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import SimilarFilmsList from '../../components/similar-films-list/similar-films-list';
 import Tabs from '../../components/tabs/tabs';
@@ -11,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm } from '../../store/api-actions';
 import { getFilm } from '../../store/film-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import PageNotFoundScreen from '../page-not-found-screen/page-not-found-screen';
 
 function MoviePageScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -32,6 +34,9 @@ function MoviePageScreen(): JSX.Element {
     dispatch(fetchFilm(params?.id));
   }, [params?.id, dispatch]);
 
+  if (!film) {
+    return <PageNotFoundScreen />;
+  }
   return (
     <>
       <section className="film-card film-card--full" style={style}>
@@ -58,7 +63,7 @@ function MoviePageScreen(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <MyListButton />
+                {authStatus === AuthorizationStatus.Auth ? <MyListButton /> : <MyListButtonNoAuth />}
                 {authStatus === AuthorizationStatus.Auth ? <AddReviewButton id={film?.id} /> : null}
               </div>
             </div>

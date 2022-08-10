@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace, GENRE_TABS, CARDS_PER_STEP } from '../../const';
+import { NameSpace, CARDS_PER_STEP, INITAL_FILMS_GENRE } from '../../const';
 import { GenreProcess } from '../../types/state';
 import { showAnotherGenre, showMoreFilms, resetFilmsList } from '../action';
 
 const initialState: GenreProcess = {
-  genre: GENRE_TABS.ALL,
+  genre: INITAL_FILMS_GENRE,
   renderedFilmCount: CARDS_PER_STEP,
 };
 

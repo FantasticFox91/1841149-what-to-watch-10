@@ -40,7 +40,7 @@ function SendingCommentsForm(): JSX.Element {
       </>);
   });
 
-  const handleReviewFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleReviewFormSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const sendingFormData = {
       rating: Number(formData.rating),

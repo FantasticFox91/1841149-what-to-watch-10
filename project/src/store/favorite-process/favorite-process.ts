@@ -17,12 +17,18 @@ export const favoriteProcess = createSlice({
       .addCase(fetchFavouriteFilms.pending, (state) => {
         state.isDataLoading = true;
       })
+      .addCase(fetchFavouriteFilms.rejected, (state) => {
+        state.isDataLoading = false;
+      })
       .addCase(fetchFavouriteFilms.fulfilled, (state, action) => {
         state.favoriteFilms = action.payload;
         state.isDataLoading = false;
       })
       .addCase(changeFavouriteFilmStatus.pending, (state) => {
         state.isDataLoading = true;
+      })
+      .addCase(changeFavouriteFilmStatus.rejected, (state) => {
+        state.isDataLoading = false;
       })
       .addCase(changeFavouriteFilmStatus.fulfilled, (state) => {
         state.isDataLoading = false;
