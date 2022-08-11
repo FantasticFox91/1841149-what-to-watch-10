@@ -28,6 +28,7 @@ export type GenreProcess = {
 
 export type AddReviewProcess = {
   isDataLoading: boolean;
+  reviewSubmited: boolean;
 };
 
 export type FavoriteFilmsProcess = {

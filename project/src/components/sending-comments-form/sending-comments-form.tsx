@@ -1,15 +1,17 @@
-import { ChangeEvent, useState, FormEvent, useEffect } from 'react';
+import { ChangeEvent, useState, FormEvent, useEffect, Fragment } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getLoadingStatus } from '../../store/add-review-process/selectors';
+import { resetReviewStatus } from '../../store/action';
+import { getLoadingStatus, getReviewStatus } from '../../store/add-review-process/selectors';
 import { addReviewAction } from '../../store/api-actions';
 
 function SendingCommentsForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const loadingStatus = useAppSelector(getLoadingStatus);
   const params = useParams();
+  const reviewStatus = useAppSelector(getReviewStatus);
+  const loadingStatus = useAppSelector(getLoadingStatus);
   const [formData, setFormData] = useState({
     rating: '',
     'review-text': '',
@@ -29,15 +31,19 @@ function SendingCommentsForm(): JSX.Element {
       return setDisable(true);
     }
     setDisable(false);
-  }, [formData]);
+    if (reviewStatus) {
+      navigate(`${AppRoute.MoviePage}${params?.id}`);
+      dispatch(resetReviewStatus);
+    }
+  }, [reviewStatus, formData]);
 
   const starsButtonList = Array.from({length: 10}, (_, i) => {
     const key = String(10 - i);
     return (
-      <>
+      <Fragment key={key}>
         <input className="rating__input" id={`star-${key}`} type="radio" name="rating" value={`${key}`} onChange={fieldChangeHandler} disabled={loadingStatus}/>
         <label className="rating__label" htmlFor={`star-${key}`}>{`Rating ${key}`}</label>
-      </>);
+      </Fragment>);
   });
 
   const handleReviewFormSubmit = async (evt: FormEvent<HTMLFormElement>) => {
@@ -49,7 +55,6 @@ function SendingCommentsForm(): JSX.Element {
 
     if (formData.rating && formData['review-text']) {
       dispatch(addReviewAction([params?.id, sendingFormData]));
-      navigate(`${AppRoute.MoviePage}${params?.id}`);
     }
   };
 

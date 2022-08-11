@@ -21,4 +21,8 @@ export const setFilm = createAction('film/setFilm',(value) => ({
   payload: value,
 }));
 
+export const resetReviewStatus = createAction('addReview/resetReviewStatus',(value) => ({
+  payload: value,
+}));
+
 export const redirectToRoute = createAction<AppRoute>('film/redirectToNotFound');
