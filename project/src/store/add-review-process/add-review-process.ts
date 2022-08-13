@@ -3,7 +3,6 @@ import { NameSpace } from '../../const';
 import { addReviewAction } from '../api-actions';
 import { AddReviewProcess } from '../../types/state';
 import { toast } from 'react-toastify';
-import { resetReviewStatus } from '../action';
 
 const initialState: AddReviewProcess = {
   isDataLoading: false,
@@ -13,14 +12,15 @@ const initialState: AddReviewProcess = {
 export const addReviewProcess = createSlice({
   name: NameSpace.AddReview,
   initialState,
-  reducers: {},
+  reducers: {
+    resetReviewStatus: (state: AddReviewProcess) => {
+      state.reviewSubmited = false;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(addReviewAction.pending, (state) => {
         state.isDataLoading = true;
-      })
-      .addCase(resetReviewStatus, (state) => {
-        state.reviewSubmited = false;
       })
       .addCase(addReviewAction.rejected, (state) => {
         state.reviewSubmited = false;
@@ -33,3 +33,5 @@ export const addReviewProcess = createSlice({
       });
   }
 });
+
+export const { resetReviewStatus } = addReviewProcess.actions;

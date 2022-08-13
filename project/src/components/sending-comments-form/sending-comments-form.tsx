@@ -2,7 +2,7 @@ import { ChangeEvent, useState, FormEvent, useEffect, Fragment } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { resetReviewStatus } from '../../store/action';
+import { resetReviewStatus } from '../../store/add-review-process/add-review-process';
 import { getLoadingStatus, getReviewStatus } from '../../store/add-review-process/selectors';
 import { addReviewAction } from '../../store/api-actions';
 
