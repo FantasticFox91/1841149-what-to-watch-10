@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
@@ -8,6 +8,12 @@ import Logo from '../logo/logo';
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const onAvatarClickkHandler = () => {
+    const path = '/mylist';
+    navigate(path);
+  };
 
   return (
     <header className="page-header">
@@ -16,7 +22,7 @@ function Header(): JSX.Element {
       {authorizationStatus === AuthorizationStatus.Auth ?
         <ul className="user-block">
           <li className="user-block__item">
-            <div className="user-block__avatar">
+            <div className="user-block__avatar" onClick={onAvatarClickkHandler}>
               <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
             </div>
           </li>

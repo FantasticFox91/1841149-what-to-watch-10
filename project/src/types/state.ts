@@ -1,5 +1,5 @@
 import { store } from '../store/index.js';
-import { AuthorizationStatus, GENRE_TABS } from '../const';
+import { AuthorizationStatus } from '../const';
 import { Film } from './films.js';
 import { errorReviewData, ReviewData } from '../types/review-data';
 
@@ -14,6 +14,7 @@ export type FilmsProcess = {
 };
 
 export type FilmProcess = {
+  promoFilm: Film | null;
   film: Film | null;
   filmComments: ReviewData[] | [];
   similarFilms: Film[] | [];
@@ -21,16 +22,17 @@ export type FilmProcess = {
 };
 
 export type GenreProcess = {
-  genre: GENRE_TABS;
+  genre: string;
   renderedFilmCount: number;
 };
 
 export type AddReviewProcess = {
   isDataLoading: boolean;
+  reviewSubmited: boolean;
 };
 
-export type PromoFilmProcess = {
-  promoFilm: Film | null;
+export type FavoriteFilmsProcess = {
+  favoriteFilms: Film[] | [];
   isDataLoading: boolean;
 };
 

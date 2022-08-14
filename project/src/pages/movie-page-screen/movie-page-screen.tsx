@@ -3,31 +3,26 @@ import { useParams, useNavigate } from 'react-router-dom';
 import AddReviewButton from '../../components/add-review-button/add-review-button';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
+import MyListButtonNoAuth from '../../components/my-list-button-no-auth/my-list-button-no-auth';
+import MyListButton from '../../components/my-list-button/my-list-button';
 import SimilarFilmsList from '../../components/similar-films-list/similar-films-list';
 import Tabs from '../../components/tabs/tabs';
 import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm } from '../../store/api-actions';
 import { getFilm } from '../../store/film-process/selectors';
-import { getFilms } from '../../store/films-process/selector';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import PageNotFoundScreen from '../page-not-found-screen/page-not-found-screen';
 
 function MoviePageScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const film = useAppSelector(getFilm);
-  const authStatus = useAppSelector(getAuthorizationStatus);
-  const favoriteFilmsLength = useAppSelector(getFilms).filter((filmA) => filmA.isFavorite).length;
-
   const navigate = useNavigate();
   const params = useParams();
+  const film = useAppSelector(getFilm);
+  const authStatus = useAppSelector(getAuthorizationStatus);
 
   const onPlayButtonClickHandler = () => {
     const path = `/player/${film?.id}`;
-    navigate(path);
-  };
-
-  const onMyListButtonClickHandler = () => {
-    const path = '/mylist';
     navigate(path);
   };
 
@@ -39,6 +34,9 @@ function MoviePageScreen(): JSX.Element {
     dispatch(fetchFilm(params?.id));
   }, [params?.id, dispatch]);
 
+  if (!film) {
+    return <PageNotFoundScreen />;
+  }
   return (
     <>
       <section className="film-card film-card--full" style={style}>
@@ -65,13 +63,7 @@ function MoviePageScreen(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button" onClick={onMyListButtonClickHandler}>
-                  <svg viewBox="0 0 18 14" width="18" height="14">
-                    <use xlinkHref="#in-list"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">{favoriteFilmsLength}</span>
-                </button>
+                {authStatus === AuthorizationStatus.Auth ? <MyListButton /> : <MyListButtonNoAuth />}
                 {authStatus === AuthorizationStatus.Auth ? <AddReviewButton id={film?.id} /> : null}
               </div>
             </div>

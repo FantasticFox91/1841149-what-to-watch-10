@@ -1,8 +1,11 @@
+import { MAX_ACTORS_IN_OVERVIEW } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getFilm } from '../../store/film-process/selectors';
 
 function Overview(): JSX.Element {
   const film = useAppSelector(getFilm);
+  const actorsOverviewList = film?.starring.slice(0, MAX_ACTORS_IN_OVERVIEW).join(', ');
+
   return (
     <>
       <div className="film-rating">
@@ -18,7 +21,7 @@ function Overview(): JSX.Element {
 
         <p className="film-card__director"><strong>Director: {film?.director}</strong></p>
 
-        <p className="film-card__starring"><strong>Starring: {film?.starring} and other</strong></p>
+        <p className="film-card__starring"><strong>Starring: {actorsOverviewList} and others</strong></p>
       </div>
     </>
   );

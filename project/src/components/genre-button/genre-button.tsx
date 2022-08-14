@@ -12,7 +12,7 @@ function GenreButton({genre, isActive, onClick}: GenreButtonProps): JSX.Element 
       className={isActive ? 'catalog__genres-item catalog__genres-item--active' : 'catalog__genres-item'}
       onClick={onClick}
     >
-      <button className="catalog__genres-link">{genre}</button>
+      <button className="catalog__genres-link" disabled={isActive}>{genre}</button>
     </li>
   );
 }
