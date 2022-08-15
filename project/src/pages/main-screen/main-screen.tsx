@@ -6,11 +6,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { getLoadingDataStatus, getPromoFilm } from '../../store/film-process/selectors';
 import MyListButton from '../../components/my-list-button/my-list-button';
-import { setFilm } from '../../store/action';
 import { useEffect } from 'react';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { AuthorizationStatus } from '../../const';
 import MyListButtonNoAuth from '../../components/my-list-button-no-auth/my-list-button-no-auth';
+import { setFilm } from '../../store/action';
 
 function MainScreen(): JSX.Element {
   const navigate = useNavigate();

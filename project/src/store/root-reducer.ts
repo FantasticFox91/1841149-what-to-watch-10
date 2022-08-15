@@ -8,8 +8,8 @@ import { genreProcess } from './genre-process/genre-process';
 import { userProcess } from './user-process/user-process';
 
 export const rootReducer = combineReducers({
-  [NameSpace.Film]: filmProcess.reducer,
   [NameSpace.Films]: filmsProcess.reducer,
+  [NameSpace.Film]: filmProcess.reducer,
   [NameSpace.Genre]: genreProcess.reducer,
   [NameSpace.User]: userProcess.reducer,
   [NameSpace.AddReview]: addReviewProcess.reducer,

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { CARDS_PER_STEP, INITAL_FILMS_GENRE } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { resetFilmsList } from '../../store/action';
+import { resetFilmsList } from '../../store/genre-process/genre-process';
 import FilmsListWithButton from '../film-list-with-button/films-list-with-button';
 import GenresList from '../genres-list/genres-list';
 

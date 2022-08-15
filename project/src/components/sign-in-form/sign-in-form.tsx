@@ -2,6 +2,7 @@ import { useRef, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { processErrorHandle } from '../../services/error-handler';
 import { fetchFavouriteFilms, loginAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getError } from '../../store/user-process/selectors';
 import ErrorMessage from '../error-message/error-message';
@@ -31,7 +32,10 @@ function SignInForm(): JSX.Element {
     if (authStatus === AuthorizationStatus.Auth) {
       navigate(AppRoute.Root);
     }
-  }, [authStatus, navigate]);
+    if (error) {
+      processErrorHandle();
+    }
+  }, [error, authStatus, navigate]);
 
   return (
     <form action="#" className="sign-in__form" onSubmit={handleFromSubmit}>
