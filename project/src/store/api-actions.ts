@@ -70,18 +70,6 @@ export const changeFavouriteFilmStatus = createAsyncThunk<Film, FavouriteData, {
   },
 );
 
-export const fetchFavFilm = createAsyncThunk<Film, string | undefined, {
-  dispatch: AppDispatch,
-  state: State,
-  extra: AxiosInstance
-}>(
-  'favorite/fetchFavFilm',
-  async (filmId, { extra: api }) => {
-    const { data } = await api.get<Film>(`${AppRoute.MoviePage}${filmId}`);
-    return data;
-  },
-);
-
 export const fetchFilmsAction = createAsyncThunk<Film[], undefined, {
   dispatch: AppDispatch,
   state: State,
@@ -113,7 +101,7 @@ export const fetchFilm = createAsyncThunk<Film, string | undefined, {
 }>(
   'film/fetchFilm',
   async (filmId, {extra: api }) => {
-    const { data } = await api.get<Film>(`${AppRoute.MoviePage}${filmId}`);
+    const { data } = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
     return data;
   },
 );

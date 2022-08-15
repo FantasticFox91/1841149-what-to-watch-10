@@ -1,13 +1,10 @@
 import { filmsProcess } from './films-process';
 import { FilmsProcess } from '../../types/state';
 import { fetchFilmsAction } from '../api-actions';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import { BACKEND_URL } from '../../services/api';
+import toastify from 'react-toastify';
+import { makeFakeFilm } from '../../utils/mock';
 
-jest.mock('react-toastify');
-jest.mock('axios');
-const mockAxios = axios as jest.Mocked<typeof axios>;
+const film = makeFakeFilm();
 
 describe('Reducer: films', () => {
   let state: FilmsProcess;
@@ -33,16 +30,15 @@ describe('Reducer: films', () => {
     });
 
     it('should set isDataLoading to false and set Films if fetchFilmsAction fulfilled', () => {
-      expect(filmsProcess.reducer(state, { type: fetchFilmsAction.fulfilled.type, payload: films}))
-        .toEqual({films, isDataLoading: false});
+      expect(filmsProcess.reducer(state, { type: fetchFilmsAction.fulfilled.type, payload: film}))
+        .toEqual({films: film, isDataLoading: false});
     });
 
     it('should invoke toast if fetchFilmAction rejected', () => {
-      expect(filmsProcess.reducer(state, { type: fetchFilmsAction.rejected.type }))
+      const spy = jest.spyOn(toastify, 'toast');
+      expect(filmsProcess.reducer(state, { type: fetchFilmsAction.rejected.type}))
         .toEqual({films: [], isDataLoading: false});
-      const message = 'test';
-      mockAxios.get.mockRejectedValueOnce(toast.warn(message));
-      expect(toast.warn).toHaveBeenCalledWith(message);
+      expect(spy).toHaveBeenCalledWith('Opsie.....something get wrong, can\'t find films. Please try again later.');
     });
   });
 });

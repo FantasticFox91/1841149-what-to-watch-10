@@ -1,6 +1,6 @@
 import { CARDS_PER_STEP } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { showMoreFilms } from '../../store/action';
+import { showMoreFilms } from '../../store/genre-process/genre-process';
 import { getRenderedFilmCount } from '../../store/genre-process/selector';
 import { Film } from '../../types/films';
 
