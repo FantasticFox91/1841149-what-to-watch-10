@@ -35,7 +35,7 @@ function SendingCommentsForm(): JSX.Element {
       navigate(`${AppRoute.MoviePage}${params?.id}`);
       dispatch(resetReviewStatus);
     }
-  }, [reviewStatus, formData]);
+  }, [dispatch, navigate, params?.id, reviewStatus, formData]);
 
   const starsButtonList = Array.from({length: 10}, (_, i) => {
     const key = String(10 - i);

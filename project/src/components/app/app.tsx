@@ -12,7 +12,7 @@ import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
-  const authStatus = useAppSelector(getAuthorizationStatus)
+  const authStatus = useAppSelector(getAuthorizationStatus);
   return (
     <Routes>
       <Route
