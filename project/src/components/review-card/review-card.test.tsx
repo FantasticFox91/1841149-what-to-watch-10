@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { makeFakeFilmComment } from '../../utils/mock';
 import ReviewCard from './review-card';
-import { humanizedDate } from '../../utils/humazieDate';
+import { humanizedDate } from '../../utils/humazie';
 
 const comment = makeFakeFilmComment();
 
-describe('Component: My-list-button-no-auth', () => {
+describe('Component: Review card', () => {
   const dateText = humanizedDate(comment.date);
   it('should render correctly', () => {
 

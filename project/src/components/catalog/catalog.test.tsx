@@ -23,6 +23,11 @@ const store = mockStore({
 });
 
 describe('Component: Catalog', () => {
+  beforeAll(() => {
+    window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+    window.HTMLMediaElement.prototype.pause = jest.fn();
+    window.HTMLMediaElement.prototype.load = jest.fn();
+  });
   it('should render correctly', () => {
 
     render(

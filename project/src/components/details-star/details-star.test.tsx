@@ -4,7 +4,7 @@ import DetailsStar from './details-star';
 
 const film = makeFakeFilm();
 
-describe('Component: Detail star', () => {
+describe('Component: Details star', () => {
   it('should render correctly', () => {
 
     render(

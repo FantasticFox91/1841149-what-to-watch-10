@@ -1,6 +1,6 @@
 
 import { ReviewData } from '../../types/review-data';
-import { dateValue, humanizedDate } from '../../utils/humazieDate';
+import { dateValue, humanizedDate } from '../../utils/humazie';
 
 type ReviewCardProp = {
   comment: ReviewData;

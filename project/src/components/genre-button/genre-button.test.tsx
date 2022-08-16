@@ -5,7 +5,7 @@ describe('Component: Genre button', () => {
   it('should render correctly', () => {
 
     render(
-      <GenreButton genre={'Comedie'} isActive onClick={(e) => console.log(e)}/>
+      <GenreButton genre={'Comedie'} isActive onClick={jest.fn()}/>
     );
 
     const liElement = screen.getByTestId('li');

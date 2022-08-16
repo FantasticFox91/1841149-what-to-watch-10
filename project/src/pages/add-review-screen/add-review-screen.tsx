@@ -1,4 +1,4 @@
-import HeaderWithBreadcrumbs from '../../components/header-with-breadcrumbs/header-with-breadcrumbs';
+import Header from '../../components/header/header';
 import SendingCommentsForm from '../../components/sending-comments-form/sending-comments-form';
 import { useAppSelector } from '../../hooks';
 import { getFilm } from '../../store/film-process/selectors';
@@ -15,7 +15,7 @@ function AddReviewScreen(): JSX.Element {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <HeaderWithBreadcrumbs />
+        <Header isBreadcrumbs />
 
         <div className="film-card__poster film-card__poster--small">
           <img src={film?.posterImage} alt={film?.name} width="218" height="327" />
