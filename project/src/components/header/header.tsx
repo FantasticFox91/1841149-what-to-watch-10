@@ -4,8 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import Logo from '../logo/logo';
+import MyListTitle from '../my-list-title/my-list-title';
 
-function Header(): JSX.Element {
+type HeaderProps = {
+  isInMyList?: boolean;
+}
+
+function Header({isInMyList}: HeaderProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -15,8 +20,10 @@ function Header(): JSX.Element {
     navigate(path);
   };
 
+  const renderMyListHeader = isInMyList ? <MyListTitle /> : null;
+
   return (
-    <header className="page-header">
+    <header className={isInMyList ? 'user-page__head page-header' : 'page-header'}>
       <Logo />
 
       {authorizationStatus === AuthorizationStatus.Auth ?
@@ -26,6 +33,7 @@ function Header(): JSX.Element {
               <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
             </div>
           </li>
+          {renderMyListHeader}
           <li className="user-block__item">
             <Link
               onClick={(evt) => {

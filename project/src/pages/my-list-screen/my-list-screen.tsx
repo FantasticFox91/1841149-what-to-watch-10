@@ -13,7 +13,7 @@ function MyListScreen(): JSX.Element {
 
   return (
     <div className="user-page">
-      <Header />
+      <Header isInMyList/>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>

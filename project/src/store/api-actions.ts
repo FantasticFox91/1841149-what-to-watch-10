@@ -7,7 +7,7 @@ import { APIRoute, AppRoute } from '../const';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { addReviewData, errorReviewData, ReviewData } from '../types/review-data';
-import { FavouriteData } from '../types/favourite-data';
+import { FavoriteData } from '../types/favourite-data';
 import { setFilm } from './action';
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
@@ -57,7 +57,7 @@ export const fetchFavouriteFilms = createAsyncThunk<Film[] | [], undefined, {
   },
 );
 
-export const changeFavouriteFilmStatus = createAsyncThunk<Film, FavouriteData, {
+export const changeFavouriteFilmStatus = createAsyncThunk<Film, FavoriteData, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance

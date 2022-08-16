@@ -4,7 +4,7 @@ import { ReviewData } from '../types/review-data';
 
 const getRandomNmber = (max: number): number => Math.floor(Math.random() * max);
 
-const getRandonFullName = () => `${name.firstName} ${name.lastName}`;
+const getRandonFullName = () => `${name.firstName()} ${name.lastName()}`;
 
 const randomDate = (start: Date, end: Date): number => new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).getFullYear();
 
