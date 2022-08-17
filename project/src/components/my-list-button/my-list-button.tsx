@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeFavouriteFilmStatus, fetchFavouriteFilms } from '../../store/api-actions';
 import { getFavoriteFilmsLength, getLoadingStatus } from '../../store/favorite-process/selectors';
 import { getFilmID, getFilmStatus } from '../../store/film-process/selectors';
-import { FavouriteData } from '../../types/favourite-data';
+import { FavoriteData } from '../../types/favourite-data';
 import './my-list-button.css';
 
 function MyListButton(): JSX.Element {
@@ -14,7 +14,7 @@ function MyListButton(): JSX.Element {
   const filmStatus = useAppSelector(getFilmStatus);
 
   const onMyListButtonClickHandler = () => {
-    const data: FavouriteData = {
+    const data: FavoriteData = {
       filmId: String(filmID),
       filmStatus: filmStatus,
     };

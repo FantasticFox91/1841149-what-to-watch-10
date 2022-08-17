@@ -1,5 +1,6 @@
 import { useAppSelector } from '../../hooks';
 import { getFilm } from '../../store/film-process/selectors';
+import { humanazeFilmDuration } from '../../utils/humazie';
 import DetailsStar from '../details-star/details-star';
 import './details.css';
 
@@ -9,16 +10,6 @@ function Details(): JSX.Element {
     <DetailsStar key={star} star={star} />
   );
 
-  const huminazeFilmDuration = (minutes: number): string | null => {
-    const MINUTES_IN_HOUR = 60;
-    const hours = minutes / MINUTES_IN_HOUR;
-    if (hours < 1) {
-      return `${minutes}m`;
-    } else if ((minutes % MINUTES_IN_HOUR) === 0) {
-      return `${hours.toFixed(0)}h`;
-    }
-    return `${hours.toFixed(0)}h ${minutes % MINUTES_IN_HOUR}m` ;
-  };
 
   return (
     <div className="film-card__text film-card__row">
@@ -34,9 +25,10 @@ function Details(): JSX.Element {
       </div>
 
       <div className="film-card__text-col">
+
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film?.runTime !== undefined ? huminazeFilmDuration(film.runTime) : null}</span>
+          <span className="film-card__details-value">{film?.runTime !== undefined ? humanazeFilmDuration(film.runTime) : 'Unknown'}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

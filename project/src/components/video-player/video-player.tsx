@@ -33,9 +33,10 @@ function VideoPlayer({film}: VideoPlayerProps): JSX.Element | null {
       onMouseOut={() => {
         setIsPlaying(false);
       }}
+      data-testid='videoWrapper'
     >
       <Link to={`/films/${film.id}`} title={`/films/${film.id}`} className="small-film-card__link">
-        <video height="175" ref={videoRef} src={film.previewVideoLink} muted poster={film.previewImage}/>
+        <video height="175" ref={videoRef} src={film.previewVideoLink} muted poster={film.previewImage} data-testid='video'/>
         <h3 className="small-film-card__title">
           {film.name}
         </h3>

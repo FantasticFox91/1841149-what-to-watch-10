@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { FilmProcess } from '../../types/state';
-import { setFilm } from '../action';
 import { fetchFilm, fetchFilmComments, fetchSimilarFilms, fetchPromoAction } from '../api-actions';
 import { toast } from 'react-toastify';
+import { setFilm } from '../action';
 
 const initialState: FilmProcess = {
   promoFilm: null,

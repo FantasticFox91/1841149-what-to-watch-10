@@ -1,11 +1,11 @@
 import { store } from '../store/index.js';
 import { AuthorizationStatus } from '../const';
 import { Film } from './films.js';
-import { errorReviewData, ReviewData } from '../types/review-data';
+import { ReviewData } from '../types/review-data';
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus
-  error: errorReviewData | null | unknown;
+  error: boolean | null | unknown;
 };
 
 export type FilmsProcess = {

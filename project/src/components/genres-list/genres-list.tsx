@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import GenreButton from '../genre-button/genre-button';
-import { showAnotherGenre } from '../../store/action';
 import { getGenre } from '../../store/genre-process/selector';
 import { getFilms } from '../../store/films-process/selector';
 import { INITAL_FILMS_GENRE, MAX_GENRES_TABS } from '../../const';
+import { showAnotherGenre } from '../../store/genre-process/genre-process';
 
 function GenresList(): JSX.Element {
   const selectedGenre = useAppSelector(getGenre);
