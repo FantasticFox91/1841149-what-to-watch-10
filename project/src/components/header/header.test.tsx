@@ -35,6 +35,9 @@ const storeWithAuth = mockStore({
 describe('Component: Header', () => {
   beforeEach(() => {
     history.push(AppRoute.Root);
+    window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+    window.HTMLMediaElement.prototype.pause = jest.fn();
+    window.HTMLMediaElement.prototype.load = jest.fn();
   });
   describe('Header without authorization', () => {
     it('should render correctly in main screen', async () => {

@@ -27,6 +27,9 @@ const store = mockStore({
 describe('Component: Player screen', () => {
   beforeEach(() => {
     history.push(AppRoute.Player);
+    window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+    window.HTMLMediaElement.prototype.pause = jest.fn();
+    window.HTMLMediaElement.prototype.load = jest.fn();
   });
   it('should render correctly', () => {
 

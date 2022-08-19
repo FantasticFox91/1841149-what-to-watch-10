@@ -8,6 +8,11 @@ const films = Array.from({length: 10}, () => makeFakeFilm());
 const history = createMemoryHistory();
 
 describe('Component: Films list', () => {
+  beforeEach(() => {
+    window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+    window.HTMLMediaElement.prototype.pause = jest.fn();
+    window.HTMLMediaElement.prototype.load = jest.fn();
+  });
   it('should render correctly', () => {
 
     render(

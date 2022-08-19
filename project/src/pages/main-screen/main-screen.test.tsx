@@ -43,6 +43,9 @@ const authStore = mockStore({
 describe('Component: Main screen', () => {
   beforeEach(() => {
     history.push(AppRoute.Root);
+    window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+    window.HTMLMediaElement.prototype.pause = jest.fn();
+    window.HTMLMediaElement.prototype.load = jest.fn();
   });
   it('should render correctly', () => {
 
