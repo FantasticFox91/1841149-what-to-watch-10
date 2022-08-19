@@ -178,7 +178,7 @@ describe('Async actions', () => {
 
   it('Should dispatch changeFavouriteFilmStatus when POST /favorite/filmId/filmStatus', async () => {
     mockAPI
-      .onPost(`${APIRoute.Favourite}/${String(film.id)}/${Number(!film.isFavorite)}`)
+      .onPost(`${APIRoute.Favourite}/${film.id}/${Number(!film.isFavorite)}`)
       .reply(200, {...film, isFavorite: !film.isFavorite});
 
     const store = mockStore();
@@ -196,7 +196,7 @@ describe('Async actions', () => {
 
   it('Should reject changeFavouriteFilmStatus when POST /favorite/filmId/filmStatus with error', async () => {
     mockAPI
-      .onPost(`${APIRoute.Favourite}/${String(film.id)}/${Number(!film.isFavorite)}`)
+      .onPost(`${APIRoute.Favourite}/${film.id}/${Number(!film.isFavorite)}`)
       .reply(401, {error: 'You are not logged in or you do not have permission to this page.'});
 
     const store = mockStore();
@@ -231,7 +231,7 @@ describe('Async actions', () => {
 
   it('Should dispatch fetchSimilarFilmsAction when GET /films/filmID/similar', async () => {
     mockAPI
-      .onGet(`${APIRoute.Films}/${String(film.id)}/similar`)
+      .onGet(`${APIRoute.Films}/${film.id}/similar`)
       .reply(200, [film]);
 
     const store = mockStore();
@@ -248,7 +248,7 @@ describe('Async actions', () => {
 
   it('Should reject fetchSimilarFilmsAction when GET /films/filmID/similar with error', async () => {
     mockAPI
-      .onGet(`${APIRoute.Films}/${String(film.id)}/similar`)
+      .onGet(`${APIRoute.Films}/${film.id}/similar`)
       .reply(404);
 
     const store = mockStore();
@@ -282,7 +282,7 @@ describe('Async actions', () => {
 
   it('Should dispatch fetchFilm when GET /film', async () => {
     mockAPI
-      .onGet(`${APIRoute.Films}/${String(film.id)}`)
+      .onGet(`${APIRoute.Films}/${film.id}`)
       .reply(200, film);
 
     const store = mockStore();
@@ -299,7 +299,7 @@ describe('Async actions', () => {
 
   it('Should reject fetchFilm when GET /film with error', async () => {
     mockAPI
-      .onGet(`${APIRoute.Films}/${String(film.id)}`)
+      .onGet(`${APIRoute.Films}/${film.id}`)
       .reply(404);
 
     const store = mockStore();

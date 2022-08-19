@@ -27,7 +27,6 @@ function SignInForm(): JSX.Element {
     }
   };
 
-
   useEffect(() => {
     if (authStatus === AuthorizationStatus.Auth) {
       navigate(AppRoute.Root);

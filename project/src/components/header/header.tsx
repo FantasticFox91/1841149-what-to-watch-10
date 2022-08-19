@@ -47,6 +47,7 @@ function Header({isInMyList, isBreadcrumbs}: HeaderProps): JSX.Element {
               }}
               to="#"
               className="user-block__link"
+              data-testid='signout'
             >
               Sign out
             </Link>
