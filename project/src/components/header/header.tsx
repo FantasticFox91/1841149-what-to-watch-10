@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getAuthorizationStatus, getUserAvatar } from '../../store/user-process/selectors';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import Logo from '../logo/logo';
 import MyListTitle from '../my-list-title/my-list-title';
@@ -14,6 +14,7 @@ type HeaderProps = {
 
 function Header({isInMyList, isBreadcrumbs}: HeaderProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userAvatar = useAppSelector(getUserAvatar);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ function Header({isInMyList, isBreadcrumbs}: HeaderProps): JSX.Element {
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar" onClick={onAvatarClickkHandler}>
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              <img src={userAvatar} alt="User avatar" width="63" height="63" />
             </div>
           </li>
           {renderMyListHeader}

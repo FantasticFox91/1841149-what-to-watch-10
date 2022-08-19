@@ -1,6 +1,7 @@
 import { Film } from '../types/films';
-import { image, lorem, name, music, random, date } from 'faker';
+import { image, lorem, name, music, random, date, internet } from 'faker';
 import { ReviewData } from '../types/review-data';
+import { UserData } from '../types/user-data';
 
 const getRandomNmber = (max: number): number => Math.floor(Math.random() * max);
 
@@ -40,3 +41,10 @@ export const makeFakeFilmComment = (): ReviewData => ({
     name: getRandonFullName(),
   }
 } as ReviewData);
+
+export const makeFakeUser = (): UserData => ({
+  id: getRandomNmber(100),
+  avatarUrl: image.imageUrl(),
+  email: internet.email(),
+  token: random.alpha({count: 10}),
+} as UserData);
