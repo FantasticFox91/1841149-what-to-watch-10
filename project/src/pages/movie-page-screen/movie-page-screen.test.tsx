@@ -6,7 +6,7 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { makeFakeFilm } from '../../utils/mock';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import HistoryRouter from '../../components/history-route';
+import HistoryRouter from '../../components/history-router';
 import thunk from 'redux-thunk';
 import { createAPI } from '../../services/api';
 import MoviePageScreen from './movie-page-screen';

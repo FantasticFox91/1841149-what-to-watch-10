@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { makeFakeFilm } from '../../utils/mock';
-import HistoryRouter from '../history-route';
+import HistoryRouter from '../history-router';
 import SimilarFilmsList from './similar-films-list';
 import { createAPI } from '../../services/api';
 import thunk from 'redux-thunk';

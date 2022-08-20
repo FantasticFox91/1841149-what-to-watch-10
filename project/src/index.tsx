@@ -6,7 +6,7 @@ import { store } from './store';
 import { ToastContainer } from 'react-toastify';
 import { checkAuthAction, fetchFilmsAction, fetchPromoAction } from './store/api-actions';
 import 'react-toastify/dist/ReactToastify.css';
-import HistoryRouter from './components/history-route';
+import HistoryRouter from './components/history-router';
 import browserHistory from './browser-history';
 
 store.dispatch(fetchPromoAction());

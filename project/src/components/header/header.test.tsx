@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { AppRoute, AuthorizationStatus, CARDS_PER_STEP, INITAL_FILMS_GENRE } from '../../const';
-import HistoryRouter from '../history-route';
+import HistoryRouter from '../history-router';
 import Header from './header';
 import { Routes, Route } from 'react-router-dom';
 import MainScreen from '../../pages/main-screen/main-screen';

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { createAPI } from '../../services/api';
 import { makeFakeFilm } from '../../utils/mock';
-import HistoryRouter from '../history-route';
+import HistoryRouter from '../history-router';
 import SendingCommentsForm from './sending-comments-form';
 import thunk from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';

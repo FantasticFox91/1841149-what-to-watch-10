@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { TEST_INDEX } from '../../const';
 import { makeFakeFilm } from '../../utils/mock';
-import HistoryRouter from '../history-route';
+import HistoryRouter from '../history-router';
 import FilmsList from './films-list';
 
 const films = Array.from({length: 10}, () => makeFakeFilm());

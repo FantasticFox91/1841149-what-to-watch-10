@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
-import HistoryRouter from '../history-route';
+import HistoryRouter from '../history-router';
 import MyListButtonNoAuth from './my-list-button-no-auth';
 import { Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus, CARDS_PER_STEP, INITAL_FILMS_GENRE } from '../../const';

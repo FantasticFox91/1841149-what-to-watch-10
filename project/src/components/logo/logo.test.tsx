@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
-import HistoryRouter from '../history-route';
+import HistoryRouter from '../history-router';
 import Logo from './logo';
 import { Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';

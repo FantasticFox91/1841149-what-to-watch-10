@@ -4,7 +4,7 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { makeFakeFilm } from '../../utils/mock';
-import HistoryRouter from '../history-route';
+import HistoryRouter from '../history-router';
 import AddReviewButton from './add-review-button';
 import { Routes, Route } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
