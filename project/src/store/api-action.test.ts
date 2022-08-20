@@ -15,7 +15,7 @@ const film = makeFakeFilm();
 const comment = makeFakeFilmComment();
 
 describe('Async actions', () => {
-  const api = createAPI(() => fakeStore.dispatch(redirectToRoot(AppRoute.ServerError)));
+  const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
   const mockAPI = new MockAdapter(api);
   const middlewares = [thunk.withExtraArgument(api)];
 
