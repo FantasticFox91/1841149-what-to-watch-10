@@ -11,7 +11,6 @@ const fakeHistory = {
     this.location.pathname = path;
   },
 };
-
 jest.mock('../../browser-history', () => fakeHistory);
 
 const middlewares = [redirect];
