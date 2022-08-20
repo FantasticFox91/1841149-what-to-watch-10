@@ -45,7 +45,7 @@ function SignInForm(): JSX.Element {
           <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
         </div>
         <div className="sign-in__field">
-          <input ref={passwordRef} className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" pattern='^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$' minLength={2} required/>
+          <input ref={passwordRef} className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" pattern='^(?=.*[а-яА-ЯёЁa-zA-Z0-9])(?=.*\d)[а-яА-ЯёЁa-zA-Z0-9\d]{2,}$' minLength={2} required/>
           <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
         </div>
       </div>
