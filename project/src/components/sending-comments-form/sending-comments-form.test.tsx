@@ -11,10 +11,11 @@ import userEvent from '@testing-library/user-event';
 import { Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
+import { redirectToRoot } from '../../store/action';
 
 const film = makeFakeFilm();
 const history = createMemoryHistory();
-const api = createAPI();
+const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
 const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore({

@@ -5,8 +5,10 @@ import { Provider } from 'react-redux';
 import MyListButton from './my-list-button';
 import thunk from 'redux-thunk';
 import { createAPI } from '../../services/api';
+import { redirectToRoot } from '../../store/action';
+import { AppRoute } from '../../const';
 
-const api = createAPI();
+const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
 const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore({

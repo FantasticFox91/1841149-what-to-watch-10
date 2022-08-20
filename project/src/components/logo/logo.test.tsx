@@ -11,8 +11,9 @@ import MoviePageScreen from '../../pages/movie-page-screen/movie-page-screen';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createAPI } from '../../services/api';
+import { redirectToRoot } from '../../store/action';
 
-const api = createAPI();
+const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
 const middlewares = [thunk.withExtraArgument(api)];
 const film = makeFakeFilm();
 const history = createMemoryHistory();

@@ -6,11 +6,12 @@ import { createAPI } from '../../services/api';
 import thunk from 'redux-thunk';
 import Tabs from './tabs';
 import userEvent from '@testing-library/user-event';
-import { MAX_ACTORS_IN_OVERVIEW } from '../../const';
+import { AppRoute, MAX_ACTORS_IN_OVERVIEW } from '../../const';
+import { redirectToRoot } from '../../store/action';
 
 const film = makeFakeFilm();
 const comment = makeFakeFilmComment();
-const api = createAPI();
+const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
 const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore({
@@ -35,29 +36,6 @@ describe('Component: Tabs', () => {
     expect(reviewsElement).toBeInTheDocument();
   });
 
-  it('should invoke function when user click on "Overview" tab', async () => {
-    const tabClickHandle = jest.fn();
-    const activeTab = 'Overview';
-
-    render(
-      <Provider store={store}>
-        <nav className="film-nav film-card__nav">
-          <ul className="film-nav__list">
-            <li
-              className={activeTab === 'Overview' ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
-            >
-              <button className="film-nav__link" onClick={tabClickHandle}>Overview</button>
-            </li>
-          </ul>
-        </nav>
-      </Provider>
-    );
-
-    await userEvent.click(screen.getByText(/Overview/i));
-
-    expect(tabClickHandle).toBeCalled();
-  });
-
   it('should show film overview when user click on "Overview" tab', async () => {
 
     render(
@@ -79,6 +57,7 @@ describe('Component: Tabs', () => {
     expect(filmDescriptionElement).toBeInTheDocument();
     expect(directorElement).toBeInTheDocument();
     expect(actorsElement).toBeInTheDocument();
+    expect(screen.getByTestId('Overview')).toHaveClass('film-nav__item--active');
   });
 
   it('should show film details when user click on "Details" tab', async () => {
@@ -92,6 +71,7 @@ describe('Component: Tabs', () => {
     await userEvent.click(screen.getByText(/Details/i));
 
     const genreTextElement = screen.getByText(/Genre/i);
+    expect(screen.getByTestId('Details')).toHaveClass('film-nav__item--active');
     expect(genreTextElement).toBeInTheDocument();
   });
 
@@ -102,11 +82,11 @@ describe('Component: Tabs', () => {
         <Tabs />
       </Provider>
     );
-
-    await userEvent.click(screen.getByText(/Reviews/i));
+    const reviewsButtonElement = screen.getByText(/Reviews/i);
+    await userEvent.click(reviewsButtonElement);
 
     const commentTextElement = screen.getByText(`${comment.comment}`);
     expect(commentTextElement).toBeInTheDocument();
+    expect(screen.getByTestId('Reviews')).toHaveClass('film-nav__item--active');
   });
-
 });

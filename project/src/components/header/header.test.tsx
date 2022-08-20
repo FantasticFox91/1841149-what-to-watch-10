@@ -11,10 +11,11 @@ import userEvent from '@testing-library/user-event';
 import { makeFakeFilm } from '../../utils/mock';
 import { createAPI } from '../../services/api';
 import thunk from 'redux-thunk';
+import { redirectToRoot } from '../../store/action';
 
 const film = makeFakeFilm();
 const history = createMemoryHistory();
-const api = createAPI();
+const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
 const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore({

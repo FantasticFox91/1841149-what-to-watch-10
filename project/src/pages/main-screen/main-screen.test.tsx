@@ -10,10 +10,11 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import HistoryRouter from '../../components/history-route';
 import thunk from 'redux-thunk';
 import { createAPI } from '../../services/api';
+import { redirectToRoot } from '../../store/action';
 
 const history = createMemoryHistory();
 const film = makeFakeFilm();
-const api = createAPI();
+const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
 const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore({

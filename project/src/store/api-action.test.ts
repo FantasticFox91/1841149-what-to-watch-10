@@ -4,17 +4,18 @@ import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createAPI } from '../services/api';
 import { addReviewAction, changeFavouriteFilmStatus, checkAuthAction, fetchFavouriteFilms, fetchFilm, fetchFilmComments, fetchFilmsAction, fetchPromoAction, fetchSimilarFilms, loginAction, logoutAction } from './api-actions';
-import { APIRoute } from '../const';
+import { APIRoute, AppRoute } from '../const';
 import { State } from '../types/state';
 import { AuthData } from '../types/auth-data';
 import { makeFakeFilm, makeFakeFilmComment } from '../utils/mock';
-import { setFilm } from './action';
+import { redirectToRoot, setFilm } from './action';
+import { store } from '.';
 
 const film = makeFakeFilm();
 const comment = makeFakeFilmComment();
 
 describe('Async actions', () => {
-  const api = createAPI();
+  const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
   const mockAPI = new MockAdapter(api);
   const middlewares = [thunk.withExtraArgument(api)];
 

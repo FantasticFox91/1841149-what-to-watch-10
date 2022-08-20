@@ -5,10 +5,12 @@ import { makeFakeFilm, makeFakeFilmComment } from '../../utils/mock';
 import Reviews from './reviews';
 import thunk from 'redux-thunk';
 import { createAPI } from '../../services/api';
+import { redirectToRoot } from '../../store/action';
+import { AppRoute } from '../../const';
 
 const film = makeFakeFilm();
 const comment = makeFakeFilmComment();
-const api = createAPI();
+const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
 const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore({

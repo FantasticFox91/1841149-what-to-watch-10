@@ -10,8 +10,9 @@ import { createAPI } from '../../services/api';
 import thunk from 'redux-thunk';
 import { Routes, Route } from 'react-router-dom';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
+import { redirectToRoot } from '../../store/action';
 
-const api = createAPI();
+const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
 const middlewares = [thunk.withExtraArgument(api)];
 const history = createMemoryHistory();
 const mockStore = configureMockStore(middlewares);

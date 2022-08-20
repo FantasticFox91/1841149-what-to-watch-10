@@ -1,7 +1,7 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { CARDS_PER_STEP, INITAL_FILMS_GENRE } from '../../const';
+import { CARDS_PER_STEP, INITAL_FILMS_GENRE, TEST_INDEX } from '../../const';
 import { makeFakeFilm } from '../../utils/mock';
 import GenresList from './genres-list';
 import userEvent from '@testing-library/user-event';
@@ -24,7 +24,7 @@ describe('Component: Genre list', () => {
       </Provider>
     );
 
-    expect(screen.getByText(films[4].genre)).toBeInTheDocument();
+    expect(screen.getByText(films[TEST_INDEX].genre)).toBeInTheDocument();
 
   });
 

@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
+import { TEST_INDEX } from '../../const';
 import { makeFakeFilm } from '../../utils/mock';
 import HistoryRouter from '../history-route';
 import FilmsList from './films-list';
@@ -21,7 +22,7 @@ describe('Component: Films list', () => {
       </HistoryRouter>
     );
 
-    const headerElement = screen.getByText(films[4].name);
+    const headerElement = screen.getByText(films[TEST_INDEX].name);
     expect(headerElement).toBeInTheDocument();
   });
 });

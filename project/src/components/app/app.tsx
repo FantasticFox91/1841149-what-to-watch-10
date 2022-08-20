@@ -7,6 +7,7 @@ import MoviePage from '../../pages/movie-page-screen/movie-page-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import PageNotFoundScreen from '../../pages/page-not-found-screen/page-not-found-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
+import ServerErrorScreen from '../../pages/server-error-screen/server-error-screen';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import PrivateRoute from '../private-route/private-route';
@@ -51,6 +52,10 @@ function App(): JSX.Element {
       <Route
         path={AppRoute.NotFound}
         element={<PageNotFoundScreen />}
+      />
+      <Route
+        path={AppRoute.ServerError}
+        element={<ServerErrorScreen />}
       />
     </Routes>
   );

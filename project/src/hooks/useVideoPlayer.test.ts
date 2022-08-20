@@ -10,24 +10,12 @@ type VideoRef = {
   duration: number;
 }
 
-type UserClickedElement = {
-  target: {
-    value: number;
-  }
-}
-
 const video: VideoRef = {
   requestFullscreen: jest.fn(),
   pause: jest.fn(),
   play: jest.fn(),
   currentTime: 50,
   duration: 100,
-};
-
-const userClickedElement: UserClickedElement = {
-  target: {
-    value: 20,
-  }
 };
 
 const ref: React.MutableRefObject<VideoRef | null> = { current: video};
@@ -118,7 +106,7 @@ describe('Hook: useVideoPlayer', () => {
     }
 
     act(() => {
-      result.current.handleVideoProgress(userClickedElement);
+      result.current.handleVideoProgress({target: {value: '20'}} as React.ChangeEvent<HTMLInputElement>);
     });
 
     expect(result.current.playerState.progress).toBe(20);
