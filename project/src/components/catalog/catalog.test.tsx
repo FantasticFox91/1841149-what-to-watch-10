@@ -5,7 +5,7 @@ import { makeFakeFilm } from '../../utils/mock';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import thunk from 'redux-thunk';
 import Catalog from './catalog';
-import HistoryRouter from '../history-route';
+import HistoryRouter from '../history-router';
 import { createMemoryHistory } from 'history';
 
 const film = makeFakeFilm();

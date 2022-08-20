@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import userEvent from '@testing-library/user-event';
 import SignInForm from './sign-in-form';
-import HistoryRouter from '../history-route';
+import HistoryRouter from '../history-router';
 import { createMemoryHistory } from 'history';
 import { createAPI } from '../../services/api';
 import thunk from 'redux-thunk';
