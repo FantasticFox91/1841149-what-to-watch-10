@@ -3,13 +3,14 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import HistoryRouter from '../history-route';
-import { AuthorizationStatus, AppRoute, CARDS_PER_STEP, INITAL_FILMS_GENRE } from '../../const';
+import { AuthorizationStatus, AppRoute, CARDS_PER_STEP, INITAL_FILMS_GENRE, TEST_INDEX } from '../../const';
 import App from './app';
 import { makeFakeFilm } from '../../utils/mock';
 import thunk from 'redux-thunk';
 import { createAPI } from '../../services/api';
+import { redirectToRoot } from '../../store/action';
 
-const api = createAPI();
+const api = createAPI(() => store.dispatch(redirectToRoot(AppRoute.ServerError)));
 const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore(middlewares);
 const promoFilm = makeFakeFilm();
@@ -65,7 +66,7 @@ describe('Application Routing', () => {
     render(fakeApp);
 
     expect(screen.getByText(`${promoFilm.name}`)).toBeInTheDocument();
-    expect(screen.getByText(`${films[5].name}`)).toBeInTheDocument();
+    expect(screen.getByText(`${films[TEST_INDEX].name}`)).toBeInTheDocument();
     expect(screen.getByText('Show more')).toBeInTheDocument();
   });
 

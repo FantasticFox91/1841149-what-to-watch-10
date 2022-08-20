@@ -5,4 +5,4 @@ export const setFilm = createAction('film/setFilm',(value) => ({
   payload: value,
 }));
 
-export const redirectToRoute = createAction<AppRoute>('film/redirectToNotFound');
+export const redirectToRoot = createAction<AppRoute>('/servererror');

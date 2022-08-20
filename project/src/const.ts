@@ -7,6 +7,7 @@ enum AppRoute {
   Root = '/',
   Player = '/player',
   NotFound = '*',
+  ServerError = '/servererror'
 }
 
 enum AuthorizationStatus {
@@ -43,4 +44,6 @@ const MAX_ACTORS_IN_OVERVIEW = 4;
 
 const MAX_GENRES_TABS = 9;
 
-export { AppRoute, AuthorizationStatus, APIRoute, NameSpace, INITAL_FILMS_GENRE, CARDS_PER_STEP, TIMEOUT_SHOW_ERROR, MAX_ACTORS_IN_OVERVIEW, MAX_GENRES_TABS };
+const TEST_INDEX = 5;
+
+export { AppRoute, AuthorizationStatus, APIRoute, NameSpace, INITAL_FILMS_GENRE, CARDS_PER_STEP, TIMEOUT_SHOW_ERROR, MAX_ACTORS_IN_OVERVIEW, MAX_GENRES_TABS, TEST_INDEX };

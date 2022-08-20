@@ -3,7 +3,21 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
 
-const useVideoPlayer = (videoPlayer: React.MutableRefObject<HTMLVideoElement | null>) => {
+type VideoRef = {
+  requestFullscreen: () => void;
+  pause: () => void;
+  play: () => void;
+  currentTime: number;
+  duration: number;
+}
+
+type UserClickedElement = {
+  target: {
+    value: number;
+  }
+}
+
+const useVideoPlayer = (videoPlayer: React.MutableRefObject<HTMLVideoElement | null | VideoRef>) => {
   const [playerState, setPlayerState] = useState({
     isPlaying: false,
     progress: 0,
@@ -53,7 +67,7 @@ const useVideoPlayer = (videoPlayer: React.MutableRefObject<HTMLVideoElement | n
     }
   };
 
-  const handleVideoProgress = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleVideoProgress = (event: ChangeEvent<HTMLInputElement> | UserClickedElement) => {
     const a = event.target as HTMLInputElement | null;
     if (videoPlayer.current !== null && a !== null) {
       const manualChange = Number(a.value);

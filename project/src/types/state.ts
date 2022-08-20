@@ -6,6 +6,7 @@ import { ReviewData } from '../types/review-data';
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus
   error: boolean | null | unknown;
+  userAvatar: string;
 };
 
 export type FilmsProcess = {

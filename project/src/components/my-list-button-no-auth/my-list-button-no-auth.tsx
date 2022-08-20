@@ -3,7 +3,7 @@ import { AppRoute } from '../../const';
 
 function MyListButtonNoAuth(): JSX.Element {
   return (
-    <Link to={AppRoute.Login} className="btn btn--list film-card__button" >
+    <Link to={AppRoute.Login} className="btn btn--list film-card__button" data-testid='myListLink'>
       <svg viewBox="0 0 18 14" width="18" height="14" role="svg">
         <use xlinkHref="#add"></use>
       </svg>

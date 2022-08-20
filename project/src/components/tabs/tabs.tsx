@@ -44,16 +44,19 @@ function Tabs(): JSX.Element {
         <ul className="film-nav__list">
           <li
             className={activeTab === 'Overview' ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
+            data-testid="Overview"
           >
             <button className="film-nav__link" onClick={onTabClickHandler}>Overview</button>
           </li>
           <li
             className={activeTab === 'Details' ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
+            data-testid="Details"
           >
             <button className="film-nav__link" onClick={onTabClickHandler}>Details</button>
           </li>
           <li
             className={activeTab === 'Reviews' ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}
+            data-testid="Reviews"
           >
             <button className="film-nav__link" onClick={onTabClickHandler}>Reviews</button>
           </li>

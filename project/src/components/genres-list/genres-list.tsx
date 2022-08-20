@@ -13,10 +13,8 @@ function GenresList(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const onTabClickHandler = (evt: React.MouseEvent) => {
-    const clickedGenre = evt.currentTarget.textContent;
-    if (clickedGenre !== null) {
-      dispatch(showAnotherGenre(clickedGenre));
-    }
+    const clickedGenre = evt.currentTarget.textContent as string;
+    dispatch(showAnotherGenre(clickedGenre));
   };
 
   const generateGenreTab =
