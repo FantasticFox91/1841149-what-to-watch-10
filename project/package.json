@@ -2,7 +2,7 @@
   "name": "project",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://fantasticfox91.github.io/1841149-what-to-watch-10",
+  "homepage": "https://fantasticfox91.github.io/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
     "axios": "^0.21.1",
